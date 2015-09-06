@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE-edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="keywords" content="craps, craps expected value, craps odds, craps layout, craps bets">
+	<meta name="description" content="Craps is game with more bets than letters of the alphabet.  So lets talk about all of them.">
+	<meta name="robots" content="index">
+	<meta name="author" content="Ivan Harris">
+	
+    <title>Craps Clever</title>
+	
+	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/index.css">
+	<link rel="stylesheet" href="DataTables/DataTables-1.10.8/css/dataTables.bootstrap.min.css">
+	<link rel="icon" href="images/favicon.ico">
+</head>
+
+<body>
+<div class="container-fluid">
+	<header class="header clearfix skyblue">
+			
+		<div class="navyblue">
+			<img class='pull-left' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
+			<h1 class="cursive marquee hidden-xs">Craps Clever</h1>
+		</div>
+
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header navyblue">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcollapse" aria-expanded="false">
+						<span class="sr-only">Toggle Navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button> 
+					<p class="navbar-brand cursive marquee visible-xs">Craps Clever</p>
+
+			</div>
+				<div class="collapse navbar-collapse" id="navcollapse">
+					<ul class="nav nav-pills">
+						<li role="presentation" class="active"><a href="#">Home</a></li>
+						<li role="presentation"><a href="#">Information/Terms</a></li>
+						<li role="presentation"><a href="#">Table of Bets</a></li>
+						<li role="presentation"><a href="#">Table Layout</a></li>
+						<li role="presentation"><a href="#">Travel Blog</a></li>
+						<li role="presentation"><a href="#">Practice Game</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="table-responsive">
+		<table id='betstable' class="display" cellspacing="0" width="100%" class="table table-striped table-bordered table-hover table-condensed">
+
+  <thead>
+    <tr>
+      <th class="Name of Bet-cell">Name of Bet</th>
+      <th class="Payout-cell">Payout</th>
+      <th class="(%) Bet is Winner-cell">(%) Bet is Winner</th>
+      <th class="(Losses to Wins) Odds Bet is Winner-cell">(Losses to Wins) Odds Bet is Winner</th>
+      <th class="Expected Value (of $1 bet)-cell">Expected Value (of $1 bet)</th>
+      <th class="Type of Bet-cell">Type of Bet</th>
+      <th class="Numbers that could win-cell">Numbers that could win</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="firstRow">
+      <td class="Name of Bet-cell">Any Craps</td>
+      <td class="Payout-cell">7</td>
+      <td class="(%) Bet is Winner-cell">11%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">2 / 3 / 12</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Any Seven</td>
+      <td class="Payout-cell">4</td>
+      <td class="(%) Bet is Winner-cell">17%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">5 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.83</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Big 6 / Big 8</td>
+      <td class="Payout-cell">1</td>
+      <td class="(%) Bet is Winner-cell">45%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 4</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.91</td>
+      <td class="Type of Bet-cell">Multiple Roll</td>
+      <td class="Numbers that could win-cell">6 / 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Buy 4 / Buy 10</td>
+      <td class="Payout-cell">1.9</td>
+      <td class="(%) Bet is Winner-cell">33%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.97</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">4 / 10</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Buy 5 / Buy 9</td>
+      <td class="Payout-cell">1.43</td>
+      <td class="(%) Bet is Winner-cell">40%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.97</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">5 / 9</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Buy 6 / Buy 8</td>
+      <td class="Payout-cell">1.14</td>
+      <td class="(%) Bet is Winner-cell">45%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 4</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.97</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">6 / 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">C & E Split</td>
+      <td class="Payout-cell">14 / 6</td>
+      <td class="(%) Bet is Winner-cell">17%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">5 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.78</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">2 / 3 / 11 / 12</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Pass</td>
+      <td class="Payout-cell">1</td>
+      <td class="(%) Bet is Winner-cell">49%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">1 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.99</td>
+      <td class="Type of Bet-cell">Multiple Roll - Contract</td>
+      <td class="Numbers that could win-cell">4 / 5 / 6 / 7 / 8 / 9 / 10 / 11</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Come:Pass Odds 4 / Come:Pass Odds 10</td>
+      <td class="Payout-cell">2</td>
+      <td class="(%) Bet is Winner-cell">33%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">4 / 10</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Come:Pass Odds 5 / Come:Pass Odds 9</td>
+      <td class="Payout-cell">1.5</td>
+      <td class="(%) Bet is Winner-cell">40%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">5 / 9</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Come:Pass Odds 6 / Come:Pass Odds 8</td>
+      <td class="Payout-cell">1.2</td>
+      <td class="(%) Bet is Winner-cell">45%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 4</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">6 / 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Don't Come / Don't Pass</td>
+      <td class="Payout-cell">1</td>
+      <td class="(%) Bet is Winner-cell">48%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">1 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.99</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">2 / 3 / 7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Don't Come:Don't Pass Odds 4 / Don't Come:Don't Pass Odds 10</td>
+      <td class="Payout-cell">0.5</td>
+      <td class="(%) Bet is Winner-cell">67%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Don't Come:Don't Pass Odds 5 / Don't Come:Don't Pass Odds 9</td>
+      <td class="Payout-cell">0.67</td>
+      <td class="(%) Bet is Winner-cell">60%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 3</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Don't Come:Don't Pass Odds 6 / Don't Come:Don't Pass Odds 8</td>
+      <td class="Payout-cell">0.83</td>
+      <td class="(%) Bet is Winner-cell">55%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">1 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$1</td>
+      <td class="Type of Bet-cell">Multiple Roll - Non-Contract</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Field</td>
+      <td class="Payout-cell">1 / 2 / 3</td>
+      <td class="(%) Bet is Winner-cell">44%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 4</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.94</td>
+      <td class="Type of Bet-cell">Single Roll</td>
+      <td class="Numbers that could win-cell">2 / 3 / 4 / 9 / 10 / 11 / 12</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hard Four / Hard Ten</td>
+      <td class="Payout-cell">7</td>
+      <td class="(%) Bet is Winner-cell">11%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Multiple Roll</td>
+      <td class="Numbers that could win-cell">Matching Dice 4 / 10</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hard Six / Hard Eight</td>
+      <td class="Payout-cell">9</td>
+      <td class="(%) Bet is Winner-cell">9%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">10 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.91</td>
+      <td class="Type of Bet-cell">Multiple Roll</td>
+      <td class="Numbers that could win-cell">Matching Dice 6 / 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Horn: 2 / Horn 12</td>
+      <td class="Payout-cell">30</td>
+      <td class="(%) Bet is Winner-cell">3%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">35 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.86</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">2 / 12</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Horn: 3 / Horn 11 / Yo Eleven(E)</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">3 / 11</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Lay 4 / Lay 10</td>
+      <td class="Payout-cell">0.48</td>
+      <td class="(%) Bet is Winner-cell">67%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Lay 5 / Lay 9</td>
+      <td class="Payout-cell">0.63</td>
+      <td class="(%) Bet is Winner-cell">60%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 3</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Lay 6 / Lay 8</td>
+      <td class="Payout-cell">0.79</td>
+      <td class="(%) Bet is Winner-cell">55%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">1 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place 4 / Place 10</td>
+      <td class="Payout-cell">1.8</td>
+      <td class="(%) Bet is Winner-cell">33%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.93</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">4 / 10</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place 5 / Place 9</td>
+      <td class="Payout-cell">1.4</td>
+      <td class="(%) Bet is Winner-cell">40%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.96</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">5 / 9</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place 6 / Place 8</td>
+      <td class="Payout-cell">1.17</td>
+      <td class="(%) Bet is Winner-cell">45%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">8 to 4</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">6 / 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place against 4 / Place against 10</td>
+      <td class="Payout-cell">0.45</td>
+      <td class="(%) Bet is Winner-cell">67%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">2 to 2</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.97</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place against 5 / Place against 9</td>
+      <td class="Payout-cell">0.63</td>
+      <td class="(%) Bet is Winner-cell">60%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">4 to 3</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Place against 6 / Place against 8</td>
+      <td class="Payout-cell">0.8</td>
+      <td class="(%) Bet is Winner-cell">55%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">1 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.98</td>
+      <td class="Type of Bet-cell">Multiple Roll - Line</td>
+      <td class="Numbers that could win-cell">7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Four</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 4</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Five</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 5</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Six</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 6</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Seven</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 7</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Eight</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 8</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Nine</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 9</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Ten</td>
+      <td class="Payout-cell">15</td>
+      <td class="(%) Bet is Winner-cell">6%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">17 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.89</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Specific Dice Set 10</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Hard Four</td>
+      <td class="Payout-cell">30</td>
+      <td class="(%) Bet is Winner-cell">3%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">35 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.86</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Matching Dice 4</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Hard Six</td>
+      <td class="Payout-cell">30</td>
+      <td class="(%) Bet is Winner-cell">3%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">35 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.86</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Matching Dice 6</td>
+    </tr>
+    <tr>
+      <td class="Name of Bet-cell">Hop Hard Eight</td>
+      <td class="Payout-cell">30</td>
+      <td class="(%) Bet is Winner-cell">3%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">35 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.86</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Matching Dice 8</td>
+    </tr>
+    <tr class="lastRow">
+      <td class="Name of Bet-cell">Hop Hard Ten</td>
+      <td class="Payout-cell">30</td>
+      <td class="(%) Bet is Winner-cell">3%</td>
+      <td class="(Losses to Wins) Odds Bet is Winner-cell">35 to 1</td>
+      <td class="Expected Value (of $1 bet)-cell">$0.86</td>
+      <td class="Type of Bet-cell">Single Roll- Proposition</td>
+      <td class="Numbers that could win-cell">Matching Dice 10</td>
+    </tr>
+  </tbody>
+</table>
+	</div>
+		
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+	<div class="container-fluid">
+		<footer>This is the footer.</footer>
+	</div>
+</body>
+	<script type="text/javascript" src="scripts/Jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+	
+	<script>
+		$(document).ready(function(){
+			$('#betstable').DataTable();});
+	</script>
+</html>

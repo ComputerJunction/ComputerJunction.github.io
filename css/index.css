@@ -1,0 +1,63 @@
+@import url(http://fonts.googleapis.com/css?family=Kreon:400,700|Tangerine:700|Krona+One);
+
+.skyblue{
+background: rgba(175,238,238,.8);
+}
+.navyblue{
+	background: rgba(0,0,128,.3);
+}
+#glossarystatement{
+	max-width: 90%;
+	max-height: 30%;
+	margin: 2% 4% 1% 5%;
+	border: solid 10px rgba(0,0,0,.2);
+	font-size: 1.25em;
+	padding: 2%;
+	background-color: rgba(0,0,128,.1);
+	letter-spacing: .2em;
+	word-spacing: .2em;
+	line-height: 2em;
+}
+
+.cursive{
+	font-family: 'Tangerine', cursive;
+}
+.marquee{
+	font-weight: 700;
+	font-size: 7em;
+}
+.heavy, .panel-title a{
+	font-family: 'Kreon', sans-serif;
+	font-weight: 700;
+}
+.light, div[role="tabpanel"]{
+	font-family: 'Kreon', sans-serif;
+	font-weight: 400;
+}
+.larger{
+	font-family: 'Krona One', sans-serif;
+}
+
+.panel-title a {
+	font-size: 1.15em;
+	margin: auto;
+	padding: inherit;
+	
+} 
+div[role="tabpanel"]{
+	font-size: 1.15em;
+	text-align: left;
+	padding: 1%;
+}
+.panel-group div:hover{
+	background-color: rgba(0,0,128,.2);
+	-webkit-transition-duration: 2s;
+	
+}
+#betstable tr:hover{
+	background-color: darkgoldenrod;
+	-webkit-transition-duration: 1s;
+}
+.collapsing{
+	-webkit-transition: 2s;
+}
