@@ -54,6 +54,10 @@ div[role="tabpanel"]{
 	-webkit-transition-duration: 2s;
 	
 }
+#betstable tr td,#betstable tr th{
+	border: solid rgba(0,0,0,.1);
+	text-align: center;
+}
 #betstable tr:hover{
 	background-color: darkgoldenrod;
 	-webkit-transition-duration: 1s;
