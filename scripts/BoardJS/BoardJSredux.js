@@ -1,12 +1,6 @@
 
 window.onload = function () {
 			
-//			$("button").click(function () {
-//				//butnumber, butbet, butpayout, butev
-//				if (this.id === butnumber){
-//					$()
-//				}
-//			});
 
 	function viewModel() {
 				
@@ -27,14 +21,6 @@ window.onload = function () {
 			};
 		
 		self.roll = function(){
-//			var firstroll = self.first(), 
-//				secondroll = self.second(), 
-//			var dice = firstroll+secondroll,
-//				win = 0,
-//				oldbankroll = self.bankroll();
-//			var hard = (firstroll === secondroll) ? true : false;
-//				self.firstdie(firstroll);
-//				self.seconddie(secondroll);
 			self.firstdie(self.first());
 			self.seconddie(self.second());
 			var dice = self.firstdie() + self.seconddie(),
@@ -44,14 +30,6 @@ window.onload = function () {
 			//if total is not empty
 			if(self.total() > 0) {
 				
-//				var firstroll = self.first(), 
-//				secondroll = self.second(), 
-//				dice = firstroll+secondroll,
-//				win = 0,
-//				oldbankroll = self.bankroll();
-//				var hard = (firstroll === secondroll) ? true : false;
-//				self.firstdie(firstroll);
-//				self.seconddie(secondroll);
 				
 				///Set the point and move the puck
 				if (dice === self.point() || dice === 7){
@@ -59,6 +37,8 @@ window.onload = function () {
 					self.point(0);
 				}else 
 					if (dice > 3 && dice < 11 && self.point()=== 0){
+						//move this to a function(dice) with dictionary 4:342.4, 5:367.4
+						//self.point(dice)
 					switch(dice){
 						case 4:
 							d3.select("svg #puck").transition().delay(350).attr('cx', 342.4);
@@ -83,6 +63,10 @@ window.onload = function () {
 				};
 				
 				//calculate wins/losses for each number
+				//create function(die,die)
+				//inside assess hard
+				//use observable bankroll
+				//Return win
 				switch (dice){
 					case 2:
 						if(self.horntwo() != 0){
@@ -806,7 +790,8 @@ window.onload = function () {
 			}else{
 				alert("You did not bet but you can still watch the dice!")
 			};
-			//Point puck
+			//Point puck use d3 tooltip
+			//place tooltip on all bets
 			$('svg #puck').attr({
 				'title': "Point: " + self.point(),//Bet amount
 			});
@@ -977,7 +962,7 @@ window.onload = function () {
 				return self.pass()+self.dontpass()+self.passodds()+self.dontpassodds();
 			}else{
 				self.dontpass(0);self.passodds(0);self.dontpassodds(0);
-				if (self.point() !=0){
+				if (self.point() !=0 && self.pass() != 0){
 					alert("Pass Line is Contract Bet and can't be removed once wagered!")
 				}else{
 					self.pass(0);
