@@ -33,8 +33,7 @@ window.onload = function () {
 				if (dice === self.point() || dice === 7){
 					d3.select("svg #puck").transition().delay(350).attr('cx', 300.4);
 					self.point(0);
-				}else 
-					if (dice > 3 && dice < 11 && self.point()=== 0){
+				}else if (dice > 3 && dice < 11 && self.point()=== 0){
 						//move this to a function(dice) with dictionary 4:342.4, 5:367.4
 						//self.movepuck(dice)
 						//self.point(dice)
@@ -618,7 +617,7 @@ window.onload = function () {
 						if(self.come() != 0){
 							self.eightcome(self.come());
 							self.come(0);
-						}l
+						};
 						if(self.eightdontcome() != 0){
 							win -= self.eightdontcome();
 							win -= self.eightdontcomeodds();
