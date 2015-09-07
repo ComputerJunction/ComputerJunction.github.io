@@ -15,10 +15,8 @@ window.onload = function () {
 
 		self.scale = ko.pureComputed(function () {return [0, 1, 1 * self.min(), 2 * self.min(), 3 * self.min(), 4 * self.min()];
 			});
-		self.first = function () {return Math.floor(Math.random() * (6)) + 1;
-			};
-		self.second = function () {return Math.floor(Math.random() * (6)) + 1;
-			};
+		self.first = function () {return Math.floor(Math.random() * (6)) + 1;};
+		self.second = function () {return Math.floor(Math.random() * (6)) + 1;};
 		
 		self.roll = function(){
 			self.firstdie(self.first());
@@ -38,7 +36,11 @@ window.onload = function () {
 				}else 
 					if (dice > 3 && dice < 11 && self.point()=== 0){
 						//move this to a function(dice) with dictionary 4:342.4, 5:367.4
+						//self.movepuck(dice)
 						//self.point(dice)
+						//var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4};
+						//d3.select("svg #puck").transition().delay(350).attr('cx', coord[dice]);
+						
 					switch(dice){
 						case 4:
 							d3.select("svg #puck").transition().delay(350).attr('cx', 342.4);
@@ -67,6 +69,7 @@ window.onload = function () {
 				//inside assess hard
 				//use observable bankroll
 				//Return win
+				//self.eval(self.firstdie(), self.seconddie())
 				switch (dice){
 					case 2:
 						if(self.horntwo() != 0){
@@ -412,8 +415,8 @@ window.onload = function () {
 						};
 						if(self.allhops() != 0){
 							if (self.firstdie() === 1 || self.seconddie() === 1){
-								win += self.hopsixone();
-								self.hopsixone(0);
+								win += self.hopsixtwo();
+								self.hopsixtwo(0);
 							}else{
 								win += self.hopsix();
 								self.hopsix(0);
