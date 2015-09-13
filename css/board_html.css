@@ -7,6 +7,7 @@ table tr td:first-child{
 table tr td:nth-child(2){
 	text-align: center;
 	font-size: .95em;
+	overflow: hidden;
 }
 
 svg{
