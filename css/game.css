@@ -28,3 +28,9 @@ svg{
 	stroke:#000;
 	
 }
+.suggest, .count{
+	width:200px;
+	height: 25px;
+	font-size: 9px;
+	border: solid red 2px;
+}

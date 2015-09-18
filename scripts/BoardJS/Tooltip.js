@@ -5,7 +5,6 @@ window.onload = function () {
 		
 		self.info = ko.observable("Hover Over Board for Information");
 			
-
 			$.getJSON('JSON_Craps.json', function(data){
 				$.each(data, function(key,val){
 					var svg_loc = d3.select(document.body).select('svg')

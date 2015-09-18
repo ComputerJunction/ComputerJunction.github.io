@@ -12,6 +12,12 @@ window.onload = function () {
 		self.seconddie = ko.observable(0);
 		self.bankroll = ko.observable(1000);
 		self.minbet = [5, 10, 25, 50, 100, 200];
+		self.internal_count = ko.observable(0);
+		self.previous_count = ko.observable(0);
+		self.count = ko.observable(0);
+		self.suggest=ko.observable("");
+		self.fremontcheck = ko.observable(false);
+		self.buycheck = ko.observable(false);
 
 		self.scale = ko.pureComputed(function () {return [0, 1, 1 * self.min(), 2 * self.min(), 3 * self.min(), 4 * self.min()];
 			});
@@ -24,51 +30,32 @@ window.onload = function () {
 			var dice = self.firstdie() + self.seconddie(),
 				win = 0, oldbankroll = self.bankroll(),
 				hard = (self.firstdie() === self.seconddie()) ? true : false;
-				
+			
+			self.suggestcount(dice);
+			
+			///Set the point and move the puck
+			if (dice == self.point() || dice == 7){
+				d3.select("svg #puck").transition().delay(350).attr('cx', 300.4);
+				self.point(0);
+			}else if (dice > 3 && dice < 11 && self.point()=== 0){
+					//move this to a function(dice) with dictionary 4:342.4, 5:367.4
+				self.movepuck(dice);
+				self.point(dice);
+			};
+			//Point tooltip
+			$('svg #puck')
+				.attr({
+				'title': "Point: " + self.point(),
+			})
+				.tooltip({
+			'container': '.gamearticle',
+			'placement': 'top'
+			});
+			//Above point tooltip
 			//if total is not empty
 			if(self.total() > 0) {
-				
-				
-				///Set the point and move the puck
-				if (dice === self.point() || dice === 7){
-					d3.select("svg #puck").transition().delay(350).attr('cx', 300.4);
-					self.point(0);
-				}else if (dice > 3 && dice < 11 && self.point()=== 0){
-						//move this to a function(dice) with dictionary 4:342.4, 5:367.4
-						//self.movepuck(dice)
-						//self.point(dice)
-						//var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4};
-						//d3.select("svg #puck").transition().delay(350).attr('cx', coord[dice]);
-						
-					switch(dice){
-						case 4:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 342.4);
-							break;
-						case 5:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 367.4);
-							break;
-						case 6:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 392.4);
-							break;
-						case 8:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 417.4);
-							break;
-						case 9:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 442.4);
-							break;
-						case 10:
-							d3.select("svg #puck").transition().delay(350).attr('cx', 467.4);
-							break;
-					};
-					self.point(dice);
-				};
-				
-				//calculate wins/losses for each number
-				//create function(die,die)
-				//inside assess hard
-				//use observable bankroll
-				//Return win
-				//self.eval(self.firstdie(), self.seconddie())
+				//put losses for anyseven
+				//put losses for odds bets
 				switch (dice){
 					case 2:
 						if(self.horntwo() != 0){
@@ -99,6 +86,13 @@ window.onload = function () {
 						};
 						if(self.allhops() != 0){
 							win -= self.allhops();
+						};
+						if(self.field() != 0){
+							win += self.field()*2;
+							//bet stays
+						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
 						};
 						break;
 					case 3:
@@ -131,6 +125,13 @@ window.onload = function () {
 						if(self.allhops() != 0){
 							win -= self.allhops();
 						};
+						if(self.field() != 0){
+							win += self.field();
+							//bet stays
+						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
 						break;
 					case 11:
 						if(self.horneleven() != 0){
@@ -162,6 +163,13 @@ window.onload = function () {
 						if(self.allhops() != 0){
 							win -= self.allhops();
 						};
+						if(self.field() != 0){
+							win += self.field();
+							//bet stays
+						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
 						break;
 					case 12:
 						if(self.horntwelve() != 0){
@@ -192,6 +200,13 @@ window.onload = function () {
 						};
 						if(self.allhops() != 0){
 							win -= self.allhops();
+						};
+						if(self.field() != 0){
+							win += self.field()*2;
+							//bet stays
+						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
 						};
 						break;
 
@@ -274,6 +289,24 @@ window.onload = function () {
 								}
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 2);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
+						
 						break; //put hops here
 					case 5:
 						if(self.placefive() != 0){
@@ -341,6 +374,23 @@ window.onload = function () {
 							};
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 1.5);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
 						break;
 					case 6:
 						if(self.placesix() != 0){
@@ -422,6 +472,23 @@ window.onload = function () {
 							};
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 1.2);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
 						break;
 					case 7:
 						if(self.sub_seven_total() != 0){
@@ -510,25 +577,27 @@ window.onload = function () {
 								win -= self.pass();
 								win -= self.passodds();
 								win += self.dontpass();
-								switch (self.point()){
-									case 4:
-										win += self.dontpassodds * .50;
-										break;
-									case 5:
-										win += self.dontpassodds * .67;
-										break;
-									case 6:
-										win += self.dontpassodds * .83;
-										break;
-									case 8:
-										win += self.dontpassodds * .83;
-										break;
-									case 9:
-										win += self.dontpassodds * .67;
-										break;
-									case 10:
-										win += self.dontpassodds * .50;
-										break;
+								if (self.dontpassodds() != 0){
+									switch (self.point()){
+										case 4:
+											win += self.dontpassodds * .50;
+											break;
+										case 5:
+											win += self.dontpassodds * .67;
+											break;
+										case 6:
+											win += self.dontpassodds * .83;
+											break;
+										case 8:
+											win += self.dontpassodds * .83;
+											break;
+										case 9:
+											win += self.dontpassodds * .67;
+											break;
+										case 10:
+											win += self.dontpassodds * .50;
+											break;
+									};
 								};
 
 							};
@@ -543,7 +612,8 @@ window.onload = function () {
 							win += self.ninedontcomeodds() * .67;
 							win += self.tendontcomeodds() * .50;
 							
-							self.come_total(true);
+							self.come_total(true)
+							self.allcomeodds(true);
 						}
 						if(self.allhops() != 0){
 							if (self.firstdie()===1 || self.seconddie() === 1){
@@ -639,6 +709,23 @@ window.onload = function () {
 							};
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 1.2);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
 						break;
 					case 9:
 						if(self.placenine() != 0){
@@ -705,6 +792,23 @@ window.onload = function () {
 							};
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 1.5);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
 						break;
 					case 10:
 						if(self.placeten() != 0){
@@ -783,25 +887,35 @@ window.onload = function () {
 								}
 							win -= self.allhops();
 						};
+						if(self.anyseven() !=0){
+							win-=self.anyseven();self.anyseven(0)
+						};
+						if(self.pass() != 0){
+							win += self.pass();
+							win += Math.ceil(self.passodds() * 2);
+							//bets returned
+							self.pass(0);
+							self.passodds(0);
+							};
+						if(self.dontpass() != 0){
+							win += self.dontpass();
+							win += self.dontpassodds();
+							//bets returned
+							self.dontpass(0);
+							self.dontpassodds(0);
+							};
 						break;
 					default:
 						return alert ("This is crazy some how number was rolled that was not possible with two fair dice.  Weird, very weird.");
 				};
-				alert(win);
+//				alert(win);
 				self.bankroll(win+oldbankroll);
 			}else{
-				alert("You did not bet but you can still watch the dice!")
+//				alert("You did not bet but you can still watch the dice!")
 			};
 			//Point puck use d3 tooltip
 			//place tooltip on all bets
-			$('svg #puck').attr({
-				'title': "Point: " + self.point(),//Bet amount
-			});
-    
-			$('svg #puck').tooltip({
-			'container': '.gamearticle',
-			'placement': 'top'
-			});
+			
 
 		};
 		self.dontpass = ko.observable(0);
@@ -965,22 +1079,15 @@ window.onload = function () {
 			}else{
 				self.dontpass(0);self.passodds(0);self.dontpassodds(0);
 				if (self.point() !=0 && self.pass() != 0){
-					alert("Pass Line is Contract Bet and can't be removed once wagered!")
+//					alert("Pass Line is Contract Bet and can't be removed once wagered!")
 				}else{
 					self.pass(0);
 				}
 			};
 		};
 		self.come_total = function(reset){
-			var come = self.fourcome()+self.fivecome()
-			+self.sixcome()+self.eightcome()
-			+self.ninecome()+self.tencome();
-			var dontcome = self.fourdontcome()+self.fivedontcome()
-			+self.sixdontcome()+self.eightdontcome()
-			+self.ninedontcome()+self.tendontcome();
-				
 			if (reset === undefined){
-				return self.come()+self.dontcome()+come+dontcome;
+				return self.come()+self.dontcome()+self.allcome()+self.dontcome();
 			}else{
 				self.dontcome(0);self.come(0);
 				self.fourdontcome;self.fivedontcome(0);
@@ -1003,10 +1110,27 @@ window.onload = function () {
 			+self.ninedontcome()+self.tendontcome();
 				
 		};
-		self.allcomeodds = function(){
-			return self.fourcomeodds()+self.fivecomeodds()
+		self.allcomeodds = function(reset){
+			if (reset === undefined){
+				return self.fourcomeodds()+self.fivecomeodds()
 			+self.sixcomeodds()+self.eightcomeodds()
 			+self.ninecomeodds()+self.tencomeodds();
+			}else{
+			self.fourcomeodds(0);self.fivecomeodds(0)
+			;self.sixcomeodds(0);self.eightcomeodds(0)
+			;self.ninecomeodds(0);self.tencomeodds(0);
+			};
+		};
+		self.alldontcomeodds = function(){
+			return self.fourdontcomeodds()+self.fivedontcomeodds()
+			+self.sixdontcomeodds()+self.eightdontcomeodds()
+			+self.ninedontcomeodds()+self.tendontcomeodds();
+//			}else{
+//			self.fourcomeodds(0);self.fivecomeodds(0)
+//			;self.sixcomeodds(0);self.eightcomeodds(0)
+//			;self.ninecomeodds(0);self.tencomeodds(0);
+//			}
+			;
 		};
 		self.allhops = function(){
 			return self.hopfour()+self.hophardfour()
@@ -1077,11 +1201,15 @@ window.onload = function () {
 		self.total = function(){
 			return self.sub_line_total()+self.sub_horn_total()
 			+self.sub_seven_total()+self.sub_single_total()+self.field()
-			+self.contract_total()+self.come_total();
+			+self.contract_total()+self.come_total()+self.allcomeodds()+self.alldontcomeodds();
 						   
 		};
 		self.bank = function(){
 			return self.bankroll() - self.total();
+		};
+		self.movepuck = function(dice){
+			var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4};
+			d3.select("svg #puck").transition().delay(350).attr('cx', coord[dice]);
 		};
 		ko.bindingHandlers.chip = {
 			update:function(element, valueAccessor, allBindings){
@@ -1097,13 +1225,80 @@ window.onload = function () {
 						'container': '.gamearticle',
 						'placement': 'top'
 					});
-				}
-				
+				};
 			}
 		};
-		
-		
+		self.suggestcount = function(dice){
+			var conversion = {2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 12:2, 11:3, 10:4, 9:5, 8:6};
+			
+			self.internal_count(self.internal_count()+1);
+			self.count(self.count() + conversion[dice]);
+			self.suggest("");
+			
+			if (self.internal_count() == 6){
+				self.count(0);
+				self.internal_count(0);
+				self.previous_count(0);
+			};
+			
+			if (self.internal_count() == 5){
+				var num = 31 - self.count();
+				var pop = "";
+				if (num > 7){
+					pop = "Come";
+				}else if (num < 8 && num > 3){
+					pop = "Fremont";
+				}else{
+					pop = "Field";
+				}
+				self.suggest("Bet this " + pop);
+				self.previous_count(self.count())
+			};
 	};
+		
+		self.systemreset = function(){
+			self.buyfive(0);self.buysix(0);
+			self.buyeight(0);self.placefive(0);
+			self.placesix(0);self.placeeight(0);
+			self.field(0);
+							
+		};
+		self.fremontsystem = ko.computed(function() {
+
+				if (self.fremontcheck()){ 
+					
+					if (self.buycheck()){
+						self.systemreset();
+						self.buyfive(self.scale()[4]);
+						self.buysix(self.scale()[4]);
+						self.buyeight(self.scale()[4]);
+						
+					}else{
+						self.systemreset();
+						self.placefive(self.scale()[4]);
+						self.placesix(self.scale()[4]);
+						self.placeeight(self.scale()[4]);
+						};
+					self.field(self.scale()[2]);
+				}else{
+					self.systemreset();
+			}
+		});
+
+	};
+					
+//		$.getJSON('JSON_Craps.json', function(data){
+//				$.each(data, function(key,val){
+//					var newkey = key.split('_').join(''),
+//						svg_loc = d3.select(document.body).select('svg');
+//					
+//					svg_loc.select('#'+newkey).on('mouseup', function(){
+//						alert(newkey);
+//						var n = "self."+newkey;
+//						n(self.min())
+//					});
+//				});
+//		});
 	ko.applyBindings(new viewModel());
 
 };

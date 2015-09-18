@@ -34,7 +34,7 @@
 					  <ul class="nav nav-tabs" role="tablist">
 						  <li role="presentation" class="active"><a href="#num" aria-controls="num" role="tab" data-toggle="tab">Number</a></li>
 						  <li role="presentation"><a href="#bet" aria-controls="bet" role="tab" data-toggle="tab">Bet Type</a></li>
-						  
+<!--						  <li role="presentation"><a href="#system" aria-controls="system" role="tab" data-toggle="tab">System</a></li>-->
 					  </ul>
 
 					  <!-- Tab panes -->
@@ -255,24 +255,24 @@
 														<td>Lay Four</td>
 														<td><select data-bind="value:layfour, options:scale"></select></td></tr>
 														<tr>
-														<td>Place Against Ten</td>
+														<td>Dont Place Ten</td>
 														<td><select data-bind="value:againstten, options:scale"></select></td></tr>
 														<tr>
-														<td>Place Against Nine</td>
+														<td>Dont Place Nine</td>
 														<td><select data-bind="value:againstnine, options:scale"></select></td>
 													
 														</tr>
 														<tr>
-														<td>Place Against Eight</td>
+														<td>Dont Place Eight</td>
 														<td><select data-bind="value:againsteight, options:scale"></select></td></tr>
 														<tr>
-														<td>Place Against Six</td>
+														<td>Dont Place Six</td>
 														<td><select data-bind="value:againstsix, options:scale"></select></td></tr>
 														<tr>
-														<td>Place Against Five</td>
+														<td>Dont Place Five</td>
 														<td><select data-bind="value:againstfive, options:scale"></select></td></tr>
 														<tr>
-														<td>Place Against Four</td>
+														<td>Dont Place Four</td>
 														<td><select data-bind="value:againstfour, options:scale"></select></td></tr>
 														<tr>
 														<td>Hop Seven [3, 4]</td>
@@ -502,6 +502,7 @@
 										</div>
 									</div>
 								</div>
+							</div>
 							<div class="panel panel-default">
 
 									<h4 class="panel-title">
@@ -661,12 +662,34 @@
 	-->
 
 							</div>
+						
+<!--
+						<div role="tabpanel" class="tab-pane" id="system">
+							<div class="panel-group" id="accordionsystem" role="tablist" aria-multiselectable="true">
+								<div class="panel panel-default">
+											<h4 class="panel-title">
+												<a role="button" data-toggle="collapse" data-parent="#accordionsystem" href="#systemcollapse" aria-expanded="true" aria-controls="systemcollapse">
+													<div class="panel-heading" role="tab" id="systemheading">
+													Selection of Systems
+													</div>
+												</a>
+											</h4>
+
+									<div id="systemcollapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="systemheading">
+										<div class="panel-body">
+											<p>Fremont/Iron Cross System 
+												<input type="checkbox" data-bind="checked:fremontcheck">
+												<span>Buy Bets?<input type="checkbox" data-bind="checked:buycheck"/></span>
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-
+-->
 					</div>
-
 			  </div>
-		</div>
+			</div>
 		  <div class="modal-footer">
 			<button type="button" class="btn btn-default" data-dismiss="modal">CLOSE WINDOW</button>
 			<button type="button" class="btn btn-primary" data-bind="click:clear">RESET ALL</button>
@@ -699,8 +722,8 @@
 					<div class="collapse navbar-collapse" id="navcollapse">
 						<ul class="nav nav-pills">
 							<li role="presentation"><a href="index.html">Home</a></li>
-							<li role="presentation"><a href="information.html">Information/Terms</a></li>
-							<li role="presentation"><a href="table.html">Table of Bets</a></li>
+<!--							<li role="presentation"><a href="information.html">Information/Terms</a></li>-->
+							<li role="presentation"><a href="table.html">List of Bets</a></li>
 							<li role="presentation"><a href="board.html">Table Layout</a></li>
 <!--							<li role="presentation"><a href="#">Travel Blog</a></li>-->
 							<li role="presentation" class="active"><a href="gameredux.html">Practice Game</a></li>
@@ -709,6 +732,10 @@
 				</div>
 			</nav>
 		</header>
+		<div class="suggest" data-bind="text:suggest()"></div>
+		<div class="count" data-bind="text:previous_count()"></div>
+		<div class="count" data-bind="text:count()"></div>
+		
 
 		<article class="col-lg-10 col-md-10-block col-sm-10-block col-xs-10-block gamearticle">
 			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 195.324" preserveAspectRatio="xMidyMid meet">
@@ -848,37 +875,8 @@
 					</g>
 				</g>
 				
-				<g id="DontPassLine">
-					<g id="DontPassLineRect">
-
-							<rect id="HDontPassLineRect" x="330.5" y="163.7" width="167" height="17" class="style0"/>
-
-							<rect id="VDPassLineRect" x="513.9" y="15.1" width="20.5" height="130.7" class="style0"/>
-					</g>
-					<rect x="357.4" y="169" width="126" height="11.5" class="style1"/>
-					<text id="HDPassLineText" transform="matrix(1 0 0 1 379.83 177.5376)" class="style2">Don&#8217;t Pass Line</text>
-					<rect x="521.2" y="17.8" width="11.5" height="126" class="style1"/>
-					<text id="VDPassLineText" transform="matrix(0 -1 1 0 529.7589 121.3769)" class="style2">Don&#8217;t Pass Line</text>
-					<use class="chipdp" data-bind="chip:dontpass, style:{opacity:dontpass()>0 ? 1 : 0}" x="351.5" y="169" xlink:href="#Chip" />
-					<use class="chipdp" data-bind="chip:dontpassodds, style:{opacity:dontpassodds()>0 ? 1 : 0}" x="361.5" y="169" xlink:href="#Chip" />
-				</g>
-				<g id="Come">
-					<rect id="ComeRect" x="330.4" y="55" width="182.7" height="51" class="style0"/>
-					<rect x="388" y="72.1" width="68" height="17.3" class="style1"/>
-					<text id="ComeText" transform="matrix(1 0 0 1 398.9594 84.9219)" class="style3">Come</text>
-					<use class="chipcome" data-bind="chip:come, style:{opacity:come()>0 ? 1 : 0}" x="421.5" y="94" xlink:href="#Chip" />
-				</g>
-				<g id="PassLine">
-					<path id="PassLineRect" d="M548.998 194.163H330.5V180.73h200.482 c1.493-0.356 3.518-0.383 3.518-2.268l0.466-163.408H550v178.214C550 193.8 549.6 194.2 549 194.163z" class="style0"/>
-					<rect x="356.2" y="183.8" width="126" height="11.5" class="style1"/>
-					<text id="HPassLineText" transform="matrix(1 0 0 1 394.7809 192.3237)" class="style2">Pass Line</text>
-					<rect x="538.1" y="17.8" width="11.5" height="126" class="style1"/>
-					<text id="VPassLineText" transform="matrix(0 -1 1 0 546.5826 105.25)" class="style2">Pass Line</text>
-					<use class="chippass" data-bind="chip:pass, style:{opacity:pass()>0 ? 1 : 0}" x="351.5" y="187" xlink:href="#Chip" />
-					<use class="chipdp" data-bind="chip:passodds, style:{opacity:passodds()>0 ? 1 : 0}" x="351.5" y="197" xlink:href="#Chip" />
-					
-				</g>
-				<g id="DCome">
+				
+				<g id="DontCome">
 					<rect id="DComeRect" x="480.4" y="15" width="32.7" height="40" class="style0"/>
 					<rect x="487" y="25" width="18" height="19.4" class="style1"/>
 					<text id="DComeText" transform="matrix(0.72 0 0 1 487.9447 31.4092)"><tspan x="0" y="0" class="style4">Don&#8217;t </tspan><tspan x="-0.3" y="10.8" class="style4">Come</tspan></text>
@@ -1385,7 +1383,7 @@
 							<use class="chipyo" data-bind="chip:yo, style:{opacity:yo()>0 || ce() > 0 ? 1 : 0}" x="305" y="110" xlink:href="#Chip" />
 						</g>
 					</g>
-					<g id="CELine">
+					<g id="CESplit">
 						<g>
 
 								<line x1="290.9" y1="114.8" x2="297.1" y2="113.4" class="style30"/>
@@ -1461,7 +1459,7 @@
 							</g>
 							<use class="chiphorneleven" data-bind="chip:horneleven, style:{opacity:horneleven()>0 ? 1 : 0}"  x="219" y="178.8" xlink:href="#Chip" />
 						</g>
-						<g id="HornTwo">
+						<g id="HornAces">
 							<rect id="HornTwoRect" x="75.9" y="144.3" width="98" height="25" class="style0"/>
 							<g>
 								<rect x="114.9" y="151.3" width="13" height="11" class="style7"/>
@@ -1585,7 +1583,7 @@
 					<use class="chipbigeight" data-bind="chip:bigeight, style:{opacity:bigeight()>0 ? 1 : 0}"  x="525" y="160" xlink:href="#Chip" />
 				</g>
 				
-				<g id="PlaceRects">
+<!--				<g id="PlaceRects">-->
 					<rect id="PlaceFour" x="330.5" y="43" width="25" height="5" class="style0"/>
 					<rect id="PlaceFive" x="355.5" y="43" width="25" height="5" class="style0"/>
 					<rect id="PlaceSix" x="380.5" y="43" width="25" height="5" class="style0"/>
@@ -1598,14 +1596,14 @@
 					<use class="chipplaceeight" data-bind="chip:placeeight, style:{opacity:placeeight()>0 ? 1 : 0}" x="417.9" y="44" xlink:href="#Chip" />
 					<use class="chipplacenine" data-bind="chip:placenine, style:{opacity:placenine()>0 ? 1 : 0}" x="442.9" y="44" xlink:href="#Chip" />
 					<use class="chipplaceten" data-bind="chip:placeten, style:{opacity:placeten()>0 ? 1 : 0}" x="467.9" y="44" xlink:href="#Chip" />
-				</g>
+<!--				</g>-->
 				<g id="BuyRects">
-					<rect id="BuyFour" x="330.5" y="48.2" width="25" height="5" class="style1"/>
-					<rect id="BuyFive" x="355.5" y="48.2" width="25" height="5" class="style1"/>
-					<rect id="BuySix" x="380.5" y="48.2" width="25" height="5" class="style1"/>
-					<rect id="BuyEight" x="405.5" y="48.2" width="25" height="5" class="style1"/>
-					<rect id="BuyNine" x="430.5" y="48.2" width="25" height="5" class="style1"/>
-					<rect id="BuyTen" x="455.5" y="48.2" width="25" height="5" class="style1"/>
+					<rect id="BuyFour" x="330.5" y="48.2" width="25" height="5" class="style0"/>
+					<rect id="BuyFive" x="355.5" y="48.2" width="25" height="5" class="style0"/>
+					<rect id="BuySix" x="380.5" y="48.2" width="25" height="5" class="style0"/>
+					<rect id="BuyEight" x="405.5" y="48.2" width="25" height="5" class="style0"/>
+					<rect id="BuyNine" x="430.5" y="48.2" width="25" height="5" class="style0"/>
+					<rect id="BuyTen" x="455.5" y="48.2" width="25" height="5" class="style0"/>
 					<use class="chipbuyfour" data-bind="chip:buyfour, style:{opacity:buyfour()>0 ? 1 : 0}"  x="342.9" y="49" xlink:href="#Chip" />
 					<use class="chipbuyfive" data-bind="chip:buyfive, style:{opacity:buyfive()>0 ? 1 : 0}" x="367.9" y="49" xlink:href="#Chip" />
 					<use class="chipbuysix" data-bind="chip:buysix, style:{opacity:buysix()>0 ? 1 : 0}" x="392.9" y="49" xlink:href="#Chip" />
@@ -1658,13 +1656,13 @@
 					<use data-bind="chip:tendontcomeodds, style:{opacity:tendontcomeodds()>0 ? 1 : 0}" x="472.9" y="29" xlink:href="#Chip" />
 					
 				</g>
-				<g id="DontPlaceRects">
-					<rect x="330.5" y="23.2" width="25" height="5" class="style0"/>
-					<rect x="355.5" y="23.2" width="25" height="5" class="style0"/>
-					<rect x="380.5" y="23.2" width="25" height="5" class="style0"/>
-					<rect x="405.5" y="23.2" width="25" height="5" class="style0"/>
-					<rect x="430.5" y="23.2" width="25" height="5" class="style0"/>
-					<rect x="455.5" y="23.2" width="25" height="5" class="style0"/>
+				<g id="LayRects">
+					<rect id="DontPlaceFour" x="330.5" y="23.2" width="25" height="5" class="style0"/>
+					<rect id="DontPlaceFive" x="355.5" y="23.2" width="25" height="5" class="style0"/>
+					<rect id="DontPlaceSix" x="380.5" y="23.2" width="25" height="5" class="style0"/>
+					<rect id="DontPlaceEight" x="405.5" y="23.2" width="25" height="5" class="style0"/>
+					<rect id="DontPlaceNine" x="430.5" y="23.2" width="25" height="5" class="style0"/>
+					<rect id="DontPlaceTen" x="455.5" y="23.2" width="25" height="5" class="style0"/>
 					<use class="chiplayfour" data-bind="chip:layfour, style:{opacity:layfour()>0 ? 1 : 0}" x="342.9" y="24" xlink:href="#Chip" />
 					<use class="chiplayfive" data-bind="chip:layfive, style:{opacity:layfive()>0 ? 1 : 0}" x="367.9" y="24" xlink:href="#Chip" />
 					<use class="chiplaysix" data-bind="chip:laysix, style:{opacity:laysix()>0 ? 1 : 0}" x="392.9" y="24" xlink:href="#Chip" />
@@ -1672,13 +1670,13 @@
 					<use class="chiplaynine" data-bind="chip:laynine, style:{opacity:laynine()>0 ? 1 : 0}" x="442.9" y="24" xlink:href="#Chip" />
 					<use class="chiplayten" data-bind="chip:layten, style:{opacity:layten()>0 ? 1 : 0}" x="467.9" y="24" xlink:href="#Chip" />
 				</g>
-				<g id="AgainstRects">
-					<rect id="AgainstFour" x="330.4" y="14.7" width="25" height="8" class="style1"/>
-					<rect id="AgainstFive" x="355.4" y="14.7" width="25" height="8" class="style1"/>
-					<rect id="AgainstSix" x="380.4" y="14.7" width="25" height="8" class="style1"/>
-					<rect id="AgainstEight" x="405.4" y="14.7" width="25" height="8" class="style1"/>
-					<rect id="AgainstNine" x="430.4" y="14.7" width="25" height="8" class="style1"/>
-					<rect id="AgainstTen" x="455.4" y="14.7" width="25" height="8" class="style1"/>
+				<g id="DontBuyRects">
+					<rect id="DontBuyFour" x="330.4" y="14.7" width="25" height="5" class="style0"/>
+					<rect id="DontBuyFive" x="355.4" y="14.7" width="25" height="5" class="style0"/>
+					<rect id="DontBuySix" x="380.4" y="14.7" width="25" height="5" class="style0"/>
+					<rect id="DontBuyEight" x="405.4" y="14.7" width="25" height="5" class="style0"/>
+					<rect id="DontBuyNine" x="430.4" y="14.7" width="25" height="5" class="style0"/>
+					<rect id="DontBuyTen" x="455.4" y="14.7" width="25" height="5" class="style0"/>
 					<use class="chipagainstfour" data-bind="chip:againstfour, style:{opacity:againstfour()>0 ? 1 : 0}" x="342.9" y="15" xlink:href="#Chip" />
 					<use class="chipagainstfive" data-bind="chip:againstfive, style:{opacity:againstfive()>0 ? 1 : 0}" x="367.9" y="15" xlink:href="#Chip" />
 					<use class="chipagainstsix" data-bind="chip:againstsix, style:{opacity:againstsix()>0 ? 1 : 0}" x="392.9" y="15" xlink:href="#Chip" />
@@ -1699,6 +1697,34 @@
 					<rect x="0" y="0.5" width="64" height="12" class="style1"/>
 					<text id="RollResultText" transform="matrix(1 0 0 1 9.3528 10.0989)" class="style49">Roll Result</text>
 				</g>
+				<g id="DontPassLine">
+					<g id="DontPassLineRect">
+						<rect id="HDontPassLineRect" x="330.5" y="163.7" width="167" height="17" class="style0"/>
+						<rect id="VDPassLineRect" x="513.9" y="15.1" width="20.5" height="130.7" class="style0"/>
+					</g>
+					<rect x="357.4" y="169" width="126" height="11.5" class="style1"/>
+					<text id="HDPassLineText" transform="matrix(1 0 0 1 379.83 177.5376)" class="style2">Don&#8217;t Pass Line</text>
+					<rect x="521.2" y="17.8" width="11.5" height="126" class="style1"/>
+					<text id="VDPassLineText" transform="matrix(0 -1 1 0 529.7589 121.3769)" class="style2">Don&#8217;t Pass Line</text>
+					<use class="chipdp" data-bind="chip:dontpass, style:{opacity:dontpass()>0 ? 1 : 0}" x="351.5" y="169" xlink:href="#Chip" />
+					<use class="chipdp" data-bind="chip:dontpassodds, style:{opacity:dontpassodds()>0 ? 1 : 0}" x="361.5" y="169" xlink:href="#Chip" />
+				</g>
+				<g id="Come">
+					<rect id="ComeRect" x="330.4" y="55" width="182.7" height="51" class="style0"/>
+					<rect x="388" y="72.1" width="68" height="17.3" class="style1"/>
+					<text id="ComeText" transform="matrix(1 0 0 1 398.9594 84.9219)" class="style3">Come</text>
+					<use class="chipcome" data-bind="chip:come, style:{opacity:come()>0 ? 1 : 0}" x="421.5" y="94" xlink:href="#Chip" />
+				</g>
+				<g id="PassLine">
+					<path id="PassLineRect" d="M548.998 194.163H330.5V180.73h200.482 c1.493-0.356 3.518-0.383 3.518-2.268l0.466-163.408H550v178.214C550 193.8 549.6 194.2 549 194.163z" class="style0"/>
+					<rect x="356.2" y="183.8" width="126" height="11.5" class="style1"/>
+					<text id="HPassLineText" transform="matrix(1 0 0 1 394.7809 192.3237)" class="style2">Pass Line</text>
+					<rect x="538.1" y="17.8" width="11.5" height="126" class="style1"/>
+					<text id="VPassLineText" transform="matrix(0 -1 1 0 546.5826 105.25)" class="style2">Pass Line</text>
+					<use class="chippass" data-bind="chip:pass, style:{opacity:pass()>0 ? 1 : 0}" x="351.5" y="187" xlink:href="#Chip" />
+					<use class="chipdp" data-bind="chip:passodds, style:{opacity:passodds()>0 ? 1 : 0}" x="351.5" y="197" xlink:href="#Chip" />
+					
+				</g>
 				
 			</svg>
 		</article>
@@ -1707,6 +1733,10 @@
 			<div class="well"> 
 				<h5>Select the table minimum</h5>
 				<select data-bind="options:minbet, value:min"></select>
+				<h5>Fremont/Iron Cross System</h5>
+				<input type="checkbox" data-bind="checked:fremontcheck">
+				<h6 data-bind="visible:fremontcheck">Buy Bets?</h6>
+				<input type="checkbox" data-bind="checked:buycheck, visible:fremontcheck">
 				<h5>Bankroll: $<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: $<span data-bind="text:total()"></span></h5>
 				
