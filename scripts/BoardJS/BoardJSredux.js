@@ -10,7 +10,12 @@ window.onload = function () {
 		self.point = ko.observable(0);
 		self.firstdie = ko.observable(0);
 		self.seconddie = ko.observable(0);
+		
 		self.bankroll = ko.observable(1000);
+		
+		if(localStorage.bankroll){
+			self.bankroll(Number(localStorage.bankroll));
+		};
 		self.minbet = [5, 10, 25, 50, 100, 200];
 		self.internal_count = ko.observable(0);
 		self.previous_count = ko.observable(0);
@@ -18,6 +23,8 @@ window.onload = function () {
 		self.suggest=ko.observable("");
 		self.fremontcheck = ko.observable(false);
 		self.buycheck = ko.observable(false);
+		self.anysevenfieldcheck = ko.observable(false);
+		self.sixeightcheck = ko.observable(false);
 
 		self.scale = ko.pureComputed(function () {return [0, 1, 1 * self.min(), 2 * self.min(), 3 * self.min(), 4 * self.min()];
 			});
@@ -28,7 +35,7 @@ window.onload = function () {
 			self.firstdie(self.first());
 			self.seconddie(self.second());
 			var dice = self.firstdie() + self.seconddie(),
-				win = 0, oldbankroll = self.bankroll(),
+				win = 0,
 				hard = (self.firstdie() === self.seconddie()) ? true : false;
 			
 			self.suggestcount(dice);
@@ -51,6 +58,7 @@ window.onload = function () {
 			'container': '.gamearticle',
 			'placement': 'top'
 			});
+			//Fix pass line bets
 			//Above point tooltip
 			//if total is not empty
 			if(self.total() > 0) {
@@ -908,8 +916,10 @@ window.onload = function () {
 					default:
 						return alert ("This is crazy some how number was rolled that was not possible with two fair dice.  Weird, very weird.");
 				};
-//				alert(win);
-				self.bankroll(win+oldbankroll);
+				if (win != 0){
+					alert('Net: $' + win);
+				};
+				self.bankroll(win+self.bankroll());
 			}else{
 //				alert("You did not bet but you can still watch the dice!")
 			};
@@ -1197,6 +1207,18 @@ window.onload = function () {
 			self.sub_single_total(true);
 			self.contract_total(true);
 			
+			if (self.fremontcheck()){
+				self.fremontcheck(false);
+				if(self.buycheck())
+					self.buycheck(false);
+			};
+			if(self.anysevenfieldcheck()){
+				self.anysevenfieldcheck(false);
+			};
+			if(self.sixeightcheck()){
+				self.sixeightcheck(false);
+			};
+			
 		};
 		self.total = function(){
 			return self.sub_line_total()+self.sub_horn_total()
@@ -1205,13 +1227,22 @@ window.onload = function () {
 						   
 		};
 		self.bank = function(){
-			return self.bankroll() - self.total();
+			
+			var cal = self.bankroll() - self.total();
+			if (cal < 0){
+				var con = confirm("Do you need more money?");
+				if(con){
+					self.bankroll (1000);
+				};
+			};
+			return cal;
 		};
 		self.movepuck = function(dice){
 			var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4};
 			d3.select("svg #puck").transition().delay(350).attr('cx', coord[dice]);
 		};
 		ko.bindingHandlers.chip = {
+			//use svg tooltip plugin
 			update:function(element, valueAccessor, allBindings){
 				var value = valueAccessor();
 				var actualvalue = ko.unwrap(value);
@@ -1229,38 +1260,67 @@ window.onload = function () {
 			}
 		};
 		self.suggestcount = function(dice){
-			var conversion = {2:2, 3:3, 4:4, 5:5, 6:6, 7:7, 12:2, 11:3, 10:4, 9:5, 8:6};
-			
+//			var conversion = {2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 12:1, 11:2, 10:3, 9:4, 8:5};
+			var conversion = {2:11, 3:10, 4:4, 5:5, 6:6, 7:7, 12:11, 11:10, 10:4, 9:5, 8:6};
 			self.internal_count(self.internal_count()+1);
-			self.count(self.count() + conversion[dice]);
+			
 			self.suggest("");
 			
-			if (self.internal_count() == 6){
-				self.count(0);
-				self.internal_count(0);
-				self.previous_count(0);
-			};
+//			if (self.internal_count() ==1){
+//				self.suggest("First Roll");
+//				self.count(conversion[dice]);
+//			}else{
+				self.count(self.count()+conversion[dice]);
+				self.previous_count(self.count()-11);
+				self.count(conversion[dice]);
+//				self.internal_count(0);
+				if(self.previous_count() > 0 && self.previous_count() < 3){
+					self.suggest("Fremont");
+				}else if(self.previous_count() < 0 && self.previous_count() > -3){
+//					self.suggest("Field");
+					self.suggest("Six and Eight");
+//				}else if(self.previous_count() == -2){
+//					self.suggest("Fields")
+//				}else if(self.previous_count() == -3){
+//					self.suggest("Four and Ten");
+//				}else if(self.previous_count() == -4){
+//					self.suggest("Five and Nine");
+//				}else if(self.previous_count() == -5){
+//					self.suggest("Six and Eight");
+				};
+//			}
 			
-			if (self.internal_count() == 5){
-				var num = 31 - self.count();
-				var pop = "";
-				if (num > 7){
-					pop = "Come";
-				}else if (num < 8 && num > 3){
-					pop = "Fremont";
-				}else{
-					pop = "Field";
-				}
-				self.suggest("Bet this " + pop);
-				self.previous_count(self.count())
-			};
+
+//			if(self.internal_count()%2 == 0){
+//				var num = self.internal_count()*5+1 - self.count();
+//				switch(true){
+//					case (num < -2):
+//						self.suggest("Bet this: Anyseven for x and Field for 2x");
+//						break;
+//					case (num > 3):
+//						self.suggest("Bet this: Six and Eight ");
+//						break;
+//					default:
+//						self.suggest("Bet this: Fremont");
+//						break;
+//				}
+//				
+//			};
 	};
 		
-		self.systemreset = function(){
-			self.buyfive(0);self.buysix(0);
-			self.buyeight(0);self.placefive(0);
-			self.placesix(0);self.placeeight(0);
-			self.field(0);
+		self.systemreset = function(sel){
+			if(sel == 1){
+				self.buyfive(0);self.buysix(0);
+				self.buyeight(0);self.placefive(0);
+				self.placesix(0);self.placeeight(0);
+				self.field(0);
+			}else if(sel == 7){
+				self.field(0);
+				self.anyseven(0);
+			}else{
+				self.placesix(0);
+				self.placeeight(0);
+			}
 							
 		};
 		self.fremontsystem = ko.computed(function() {
@@ -1268,24 +1328,50 @@ window.onload = function () {
 				if (self.fremontcheck()){ 
 					
 					if (self.buycheck()){
-						self.systemreset();
+						self.systemreset(1);
 						self.buyfive(self.scale()[4]);
 						self.buysix(self.scale()[4]);
 						self.buyeight(self.scale()[4]);
 						
 					}else{
-						self.systemreset();
+						self.systemreset(1);
 						self.placefive(self.scale()[4]);
 						self.placesix(self.scale()[4]);
 						self.placeeight(self.scale()[4]);
 						};
 					self.field(self.scale()[2]);
 				}else{
-					self.systemreset();
+					self.systemreset(1);
 			}
 		});
-
+		self.anysevenfieldsystem = ko.computed(function(){
+			if (self.anysevenfieldcheck()){
+				self.systemreset(7);
+				self.field(self.scale()[4]);
+//				self.anyseven(self.scale()[2]);
+			}else{
+				self.systemreset(7)};
+		});
+		self.sixeightsystem = ko.computed(function(){
+			if (self.sixeightcheck()){
+				self.systemreset();
+				var bets = self.scale()[4];
+				self.placeeight(bets);
+				self.placesix(bets);
+			}else{
+				self.systemreset()};
+		});
+		
+		self.save = function(){
+			if(typeof(localStorage)){
+//			alert ("Store");
+				localStorage.setItem("bankroll", self.bankroll());
+			};
+		};
+	
 	};
+
+   
 					
 //		$.getJSON('JSON_Craps.json', function(data){
 //				$.each(data, function(key,val){
@@ -1302,5 +1388,4 @@ window.onload = function () {
 	ko.applyBindings(new viewModel());
 
 };
-
 
