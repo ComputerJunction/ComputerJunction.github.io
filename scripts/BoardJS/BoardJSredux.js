@@ -38,7 +38,7 @@ window.onload = function () {
 				win = 0,
 				hard = (self.firstdie() === self.seconddie()) ? true : false;
 			
-			self.suggestcount(dice);
+//			self.suggestcount(dice);
 			
 			///Set the point and move the puck
 			if (dice == self.point() || dice == 7){
@@ -1232,6 +1232,7 @@ window.onload = function () {
 			if (cal < 0){
 				var con = confirm("Do you need more money?");
 				if(con){
+					self.clear();
 					self.bankroll (1000);
 				};
 			};
@@ -1259,27 +1260,31 @@ window.onload = function () {
 				};
 			}
 		};
-		self.suggestcount = function(dice){
-//			var conversion = {2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 12:1, 11:2, 10:3, 9:4, 8:5};
-			var conversion = {2:11, 3:10, 4:4, 5:5, 6:6, 7:7, 12:11, 11:10, 10:4, 9:5, 8:6};
-			self.internal_count(self.internal_count()+1);
-			
-			self.suggest("");
-			
+//		self.suggestcount = function(dice){
+////			var conversion = {2:1, 3:2, 4:3, 5:4, 6:5, 7:6, 12:1, 11:2, 10:3, 9:4, 8:5};
+//			var conversion = {2:11, 3:10, 4:4, 5:5, 6:6, 7:7, 12:11, 11:10, 10:4, 9:5, 8:6};
+//			var num = [];
+//			self.internal_count(self.internal_count()+1);
+//			
+//			self.suggest("");
+//			
 //			if (self.internal_count() ==1){
 //				self.suggest("First Roll");
 //				self.count(conversion[dice]);
+//			}else if(self.internal_count() == 2){
+//				self.suggest('Choose Wisely');
+//				self.count(self.count()+conversion[dice]);
+//				self.previous_count(15 - self.count())
 //			}else{
-				self.count(self.count()+conversion[dice]);
-				self.previous_count(self.count()-11);
-				self.count(conversion[dice]);
+////				self.count(conversion[dice]);
 //				self.internal_count(0);
-				if(self.previous_count() > 0 && self.previous_count() < 3){
-					self.suggest("Fremont");
-				}else if(self.previous_count() < 0 && self.previous_count() > -3){
-//					self.suggest("Field");
-					self.suggest("Six and Eight");
-//				}else if(self.previous_count() == -2){
+// 
+//				if(self.previous_count() > 0 && self.previous_count() < 3){
+//					self.suggest("Fremont");
+//				}else if(self.previous_count() < 0 && self.previous_count() > -3){
+////					self.suggest("Field");
+//					self.suggest("Six and Eight");
+////				}else if(self.previous_count() == -2){
 //					self.suggest("Fields")
 //				}else if(self.previous_count() == -3){
 //					self.suggest("Four and Ten");
@@ -1287,7 +1292,7 @@ window.onload = function () {
 //					self.suggest("Five and Nine");
 //				}else if(self.previous_count() == -5){
 //					self.suggest("Six and Eight");
-				};
+//				};
 //			}
 			
 
@@ -1306,7 +1311,7 @@ window.onload = function () {
 //				}
 //				
 //			};
-	};
+//	};
 		
 		self.systemreset = function(sel){
 			if(sel == 1){
