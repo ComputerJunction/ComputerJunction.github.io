@@ -1,6 +1,21 @@
 
 window.onload = function () {
+	
+	$.getJSON('JSON_Craps.json', function(data){
+		$.each(data, function(key,val){
+			var svg_loc=d3.select(document.body).select('svg');
+			svg_loc.select("#"+key).datum(val).on('click', function(d,i){console.log(this.id);})
+					;})
+				;})
 			
+//Create object constructor
+//Object contructor will be based on click of SVG
+//It will take the ID of click region
+//Find that win number in the JSON
+//Make the name of the object the winning number [FIELD, ANYCRAPS, COME, PASS, DONT COME, DONT PASS]
+//USE protoype to add the IDS of the clicked regions to the newly created Object
+//Create observable with ID name
+//Take object with IDS as properties and make bets equal observable with same id name
 
 	function viewModel() {
 				
@@ -39,6 +54,8 @@ window.onload = function () {
 				hard = (self.firstdie() === self.seconddie()) ? true : false;
 			
 //			self.suggestcount(dice);
+			
+			
 			
 			///Set the point and move the puck
 			if (dice == self.point() || dice == 7){
@@ -559,10 +576,14 @@ window.onload = function () {
 							
 						};
 						if(self.sub_line_total() != 0){
+								
 							win -= self.sub_line_total();
+						
+							
+							
 							//reset line
 							
-						}
+						};
 						if(self.field() !=0){
 							win -=self.field();
 							//reset bet
@@ -848,7 +869,7 @@ window.onload = function () {
 							//leave bets up
 						};
 						if(self.sub_single_total() != 0){
-							win -= self.sub_single_total();
+							win-= self.sub_single_total();
 							//leave bets up
 						};
 						if(self.againstten() !=0){
@@ -916,15 +937,19 @@ window.onload = function () {
 					default:
 						return alert ("This is crazy some how number was rolled that was not possible with two fair dice.  Weird, very weird.");
 				};
+				
 				if (win != 0){
 					alert('Net: $' + win);
 				};
 				self.bankroll(win+self.bankroll());
+			
 			}else{
 //				alert("You did not bet but you can still watch the dice!")
 			};
 			//Point puck use d3 tooltip
 			//place tooltip on all bets
+			if(dice == 7){self.internal_count(-1);};
+			self.internal_count(self.internal_count() + 1);
 			
 
 		};
@@ -1329,25 +1354,42 @@ window.onload = function () {
 							
 		};
 		self.fremontsystem = ko.computed(function() {
-
+				var pl = 0, fl = 0;
+			
 				if (self.fremontcheck()){ 
+					
+					var newbank = self.bankroll();
+					if(self.internal_count() ==0){
+						pl = Math.ceil(newbank*.60 * .3);
+						fl = Math.ceil(newbank*.60 * .1);
+					}else if (self.internal_count()==1){
+						pl = Math.ceil(newbank*.40 * .3);
+						fl = Math.ceil(newbank*.40 * .1);
+					}else{
+						pl = Math.ceil(newbank*.20 * .3);
+						fl = Math.ceil(newbank*.20 * .1);
+					};
+				
 					
 					if (self.buycheck()){
 						self.systemreset(1);
-						self.buyfive(self.scale()[4]);
-						self.buysix(self.scale()[4]);
-						self.buyeight(self.scale()[4]);
+						self.buyfive(pl);
+						self.buysix(pl);
+						self.buyeight(pl);
 						
 					}else{
-						self.systemreset(1);
-						self.placefive(self.scale()[4]);
-						self.placesix(self.scale()[4]);
-						self.placeeight(self.scale()[4]);
+					self.systemreset(1);
+					self.placefive(pl);
+					self.placesix(pl);
+					self.placeeight(pl);
 						};
-					self.field(self.scale()[2]);
+					
+					self.field(fl);
+//					alert(self.placefive()+self.placesix()+self.placeeight()+self.field());
+					
 				}else{
 					self.systemreset(1);
-			}
+			};
 		});
 		self.anysevenfieldsystem = ko.computed(function(){
 			if (self.anysevenfieldcheck()){
