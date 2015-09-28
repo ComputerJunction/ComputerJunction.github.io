@@ -274,5 +274,11 @@
 		font-size:	9.6331px;
 		font-family:	'MyriadPro-Bold';
 	}
+.clickrect{
+	fill: #FFF;
+	opacity: .05;
+	stroke: none;
+	
+}
 
 	
