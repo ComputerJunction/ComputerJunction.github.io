@@ -4,10 +4,33 @@ window.onload = function () {
 	$.getJSON('JSON_Craps.json', function(data){
 		$.each(data, function(key,val){
 			var svg_loc=d3.select(document.body).select('svg');
-			svg_loc.select("#"+key).datum(val).on('click', function(d,i){console.log(this.id);})
-					;})
+			svg_loc.select("#"+key).datum(val).on('click', function(d,i){
+				
+				if(this.x){
+				var x = this.x.baseVal.value + this.width.baseVal.value / 2;
+				
+				var y = this.y.baseVal.value + this.height.baseVal.value / 2;
+				}else if(this.points){
+					var x = (this.points.getItem(2).x);
+					var y = (this.points.getItem(2).y);
+					console.info(x);console.info(y);
+				}else{
+					console.info(this);
+					
+				}
+					
+				
+				
+				svg_loc.append("use").attr(
+					{"xlink:href":"#Chip",
+					 "x":x, 
+					 "y":y }
+				);
 				;})
-			
+			;})
+		;})
+			//<use class="chippass" data-bind="chip:pass, style:{opacity:pass()>0 ? 1 : 0}" x="351.5" y="187" xlink:href="#Chip" />
+			//<use class="chipdp" data-bind="chip:passodds, style:{opacity:passodds()>0 ? 1 : 0}" x="351.5" y="197" xlink:href="#Chip" />
 //Create object constructor
 //Object contructor will be based on click of SVG
 //It will take the ID of click region
