@@ -1,53 +1,18 @@
-
+"use strict";
 
 var jsondata; 
 //All the data for payouts winning and losing numbers are stored here
 	$.getJSON("JSON_Craps.json",function(data){
 		jsondata = data;
-		console.info(jsondata);
+		
 	});
 
 window.onload = function () {
 	//grab graphic in variable
-	var svg_loc = document.getElementsByTagName('svg')[0];
-
-	
-	function createbet(e){
-		//grab id
-		var target = e.target.getAttribute('id') || e.srcElement.getAttribute('id');
-		//check if id is in dataset
-		if (jsondata[target]){
-			//call function here
-			allbets(target, e.target);
-		};
-	};
-	
-	
-	function allbets(id, rect){
-		
-		if(bet != 0){
-			//	var x = this.x.baseVal.value + this.width.baseVal.value / 2;
-//				var y = this.y.baseVal.value + this.height.baseVal.value / 2;
-//				
-				svg_loc.append("use").attr(
-					{"xlink:href":"#Chip",
-					 "x":rect.x.baseVal.value + rect.width.baseVal.value / 2 , 
-					 "y":rect.y.baseVal.value + rect.height.baseVal.value / 2 });
-
-			
-		}
-		
-	};
-	
-	
-	
-	 //put click listener on all of the SVG graphic
-	svg_loc.addEventListener("click", createbet, true);
 	
 
 	
 
-			
 //Create object constructor
 //Object contructor will be based on click of SVG
 //It will take the ID of click region
@@ -57,12 +22,55 @@ window.onload = function () {
 //Create observable with ID name
 //Take object with IDS as properties and make bets equal observable with same id name
 
-	function viewModel(id) {
+var viewModel = function(bet) {
 				
 		var self = this;
-
+		self.denomination = ko.observable(0);
+		self.allbets = ko.observableArray();
+		self.firstdie = ko.observable();
+		self.seconddie = ko.observable();
+		self.min = ko.observable(5);
+		self.minbet = ko.observable(6);
+		self.bank = ko.observable(100);
+		self.total = ko.observable(0);
+		
+		self.findid = function(data, event){
+			var target = event.target || event.scrElement;
+			var id = target.getAttribute('id');
+			
+			if(id == "five"){
+				self.denomination(5);
+			}else if(id == "twentyfive"){
+				self.denomination(25);
+			}else if(id == "onehundred")	{
+				self.denomination(100);
+			}else {
+				
+				self.addbet(id,target);
+			}
+		};
+		self.addbet = function (id, target){
+			
+			if (id){
+				console.log(jsondata[id]['Loss']);
+				self.addchip(target);
+			}else{
+				console.info(id);
+			}
+			
+		};
+		
+		self.addchip = function(target){
+			var svg_loc = document.getElementsByTagName('svg')[0];
+			
+			d3.select(svg_loc).append("use").attr(
+				{"xlink:href":"#Chip",
+				"x":target.x.baseVal.value + target.width.baseVal.value / 2 , 
+				"y":target.y.baseVal.value + target.height.baseVal.value / 2 });
+		};
+			
 	}
 	ko.applyBindings(new viewModel());
-
-};
+	
+}
 

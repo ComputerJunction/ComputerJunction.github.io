@@ -20,11 +20,7 @@
 </head>
 
 <body>
-<!--	Modal Content
- Modify SVG IDS to match JSON
-ADD click function to entire SVG
-MAYBE data-bind winning number-->
-	<!--	Presentation of game and options-->
+
 	<section class="container-fluid skyblue">
 		<header class="header clearfix skyblue">
 			
@@ -59,7 +55,7 @@ MAYBE data-bind winning number-->
 		
 
 		<article class="col-lg-10 col-md-10-block col-sm-10-block col-xs-10-block gamearticle">
-			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 195.324" preserveAspectRatio="xMidyMid meet">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 195.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
 				<defs>
 					<g id="Chip">
 						<circle cy="1.75" r="2.75" />
@@ -68,18 +64,23 @@ MAYBE data-bind winning number-->
 				
 				<circle cx="300.4" cy="6" r="6" id="puck"/>
 				
-				<g id="five" transform="translate(32.5, 100)">
+				
+				<g transform="translate(32.5, 100)">
 					<circle r="10" class="circleden"/>
 					<text dy="+4" dx="-3" class="textden">5</text>
 				</g>
-				<g id="twentyfive" transform="translate(32.5, 140)">
+				<g transform="translate(32.5, 140)">
 					<circle r="10" class="circleden"/>
 					<text dy="+3.5" dx="-5.5" class="textden">25</text>
 				</g>
-				<g id="onehundred" transform="translate(32.5, 180)">
+				<g transform="translate(32.5, 180)">
 					<circle r="10" class="circleden"/>
 					<text dy="4" dx="-9" class="textden">100</text>
 				</g>
+				
+				<rect x="22.5" y="90" height="20" width="20" id="five" class="clickrect"></rect>
+				<rect x="22.5" y="130" height="20" width="20" id="twentyfive" class="clickrect"></rect>
+				<rect x="22.5" y="170" height="20" width="20" id="onehundred" class="clickrect"></rect>
 				
 				
 				
