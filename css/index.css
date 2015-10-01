@@ -65,3 +65,6 @@ div[role="tabpanel"]{
 .collapsing{
 	-webkit-transition: 2s;
 }
+.smallfont{
+	font-size: 3em;
+}
