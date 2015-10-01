@@ -34,3 +34,11 @@ svg{
 	font-size: 9px;
 	border: solid red 2px;
 }
+.circleden{
+	fill:none;
+	stroke:#990000;
+}
+.textden{
+	stroke:#454;
+	font-size: .75em
+}
