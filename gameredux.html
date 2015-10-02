@@ -65,21 +65,35 @@
 				<circle cx="300.4" cy="6" r="6" id="puck"/>
 				
 				
-				<g transform="translate(32.5, 100)">
-					<circle r="10" class="circleden"/>
+				<text x="0.5" class="textfit">
+					<tspan x="7.5" y="60">Click chips</tspan>
+					<tspan x="7.5" dy="5"> below before betting</tspan>
+				</text>
+			
+				<g transform="translate(32.5, 90)">
+					<circle r="10" class="circleden remove"/>
+					<text dx="-8" class="textfit">
+						<tspan>Remove</tspan>
+						<tspan dx="-22" dy="5">Bets</tspan>
+					</text>
+				</g>
+				
+				<g transform="translate(32.5, 120)">
+					<circle r="10" class="circleden five"/>
 					<text dy="+4" dx="-3" class="textden">5</text>
 				</g>
-				<g transform="translate(32.5, 140)">
-					<circle r="10" class="circleden"/>
+				<g transform="translate(32.5, 150)">
+					<circle r="10" class="circleden twentyfive"/>
 					<text dy="+3.5" dx="-5.5" class="textden">25</text>
 				</g>
 				<g transform="translate(32.5, 180)">
-					<circle r="10" class="circleden"/>
+					<circle r="10" class="circleden onehundred"/>
 					<text dy="4" dx="-9" class="textden">100</text>
 				</g>
 				
-				<rect x="22.5" y="90" height="20" width="20" id="five" class="clickrect"></rect>
-				<rect x="22.5" y="130" height="20" width="20" id="twentyfive" class="clickrect"></rect>
+				<rect x="22.5" y="80" height="20" width="20" id="remove" class="clickrect"></rect>
+				<rect x="22.5" y="110" height="20" width="20" id="five" class="clickrect"></rect>
+				<rect x="22.5" y="140" height="20" width="20" id="twentyfive" class="clickrect"></rect>
 				<rect x="22.5" y="170" height="20" width="20" id="onehundred" class="clickrect"></rect>
 				
 				
@@ -657,8 +671,8 @@
 		
 		<article class="col-lg-2 col-md-2-block col-sm-2-block col-xs-2-block skyblue" id="betbox">
 			<div class="well"> 
-				<h5>Select the table minimum</h5>
-				<select data-bind="options:minbet, value:min"></select>
+				<h5 data-bind="text:allbets()"></h5>
+				
 				<h5>Bankroll: $<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: $<span data-bind="text:total()"></span></h5>
 				

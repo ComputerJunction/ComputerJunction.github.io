@@ -8,11 +8,7 @@ svg{
 	border: solid .35em;
 }
 
-#puck{
-	fill: #999;
-	stroke:#000;
-	stroke-width:2;
-}
+
 .gamearticle{
 	max-height: 85%;
 	max-width: 90%;
@@ -23,22 +19,9 @@ svg{
 	opacity: 1;
 }
 
-#Chip{
-	fill: #990000;
-	stroke:#000;
-	
-}
 .suggest, .count{
 	width:200px;
 	height: 25px;
 	font-size: 9px;
 	border: solid red 2px;
-}
-.circleden{
-	fill:none;
-	stroke:#990000;
-}
-.textden{
-	stroke:#454;
-	font-size: .75em
 }

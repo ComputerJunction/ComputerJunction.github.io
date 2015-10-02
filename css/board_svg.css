@@ -1,284 +1,312 @@
-	.style0{
-		stroke:	#000000;
-		stroke-miterlimit:	10;
-		fill: #FFF;
-	}
-	.style1{
-		fill: none;
-	}
-	.style2{
-		font-size:	12px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style3{
-		font-size:	18px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style4{
-		font-size:	9px;
-		font-family: 'MyriadPro-Bold';
-	}
-	.style5{
-		stroke:	#000000;
-		stroke-width:	0.8878;
-		stroke-miterlimit:	10;
-		fill:	none;
-	}
-	.style6{
-		font-size:	17px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style7{
-		stroke:	#000000;
-		stroke-miterlimit:	10;
-		fill:	#FF0000;
-	}
-	.style8{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0074;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style9{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9456;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style10{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9354;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style11{
-		stroke:	#FFFFFF;
-		stroke-width:	0.8781;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style12{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0073;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style13{
-		stroke:	#FFFFFF;
-		stroke-miterlimit:	10;
-		fill:	none;
-	}
-	.style14{
-		stroke:	#FFFFFF;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style15{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0653;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style16{
-		stroke:	#FFFFFF;
-		stroke-width:	0.966;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style17{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9186;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style18{
-		stroke:	#FFFFFF;
-		stroke-width:	0.982;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style19{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0461;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	
-	.style20{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0516;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style21{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9813;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style22{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0454;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style23{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9387;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style24{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0154;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style25{
-		stroke:	#FFFFFF;
-		stroke-width:	0.9532;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style26{
-		opacity:	0.94;
-		stroke:	#FFFFFF;
-		stroke-miterlimit:	10;
-		fill:	none;
-	}
-	.style27{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0198;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style28{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0864;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style29{
-		stroke:	#000000;
-		stroke-width:	0.6415;
-		stroke-miterlimit:	10;
-		fill:	none;
-	}
-	
-	.style30{
-		stroke:	#000000;
-		stroke-width:	1.1405;
-		stroke-miterlimit:	10;
-		fill:	none;
-	}
-	.style31{
-		stroke:	#FFFFFF;
-		stroke-width:	1.008;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style32{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0738;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style33{
-		stroke:	#FFFFFF;
-		stroke-width:	1.0138;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style34{
-		opacity:	0.5;
-		fill:	#808080;
-	}
-	.style35{
-		opacity:	0;
-	}
-	.style36{
-		stroke:	#FFF;
-		stroke-width:	1px;
-		stroke-miterlimit:	1px;
-		fill:	#FFF;
+.style0{
+	stroke:	#000000;
+	stroke-miterlimit:	10;
+	fill: #FFF;
+}
+.style1{
+	fill: none;
+}
+.style2{
+	font-size:	12px;
+	font-family:	'MyriadPro-Bold';
+}
+.style3{
+	font-size:	18px;
+	font-family:	'MyriadPro-Bold';
+}
+.style4{
+	font-size:	9px;
+	font-family: 'MyriadPro-Bold';
+}
+.style5{
+	stroke:	#000000;
+	stroke-width:	0.8878;
+	stroke-miterlimit:	10;
+	fill:	none;
+}
+.style6{
+	font-size:	17px;
+	font-family:	'MyriadPro-Bold';
+}
+.style7{
+	stroke:	#000000;
+	stroke-miterlimit:	10;
+	fill:	#FF0000;
+}
+.style8{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0074;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style9{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9456;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style10{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9354;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style11{
+	stroke:	#FFFFFF;
+	stroke-width:	0.8781;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style12{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0073;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style13{
+	stroke:	#FFFFFF;
+	stroke-miterlimit:	10;
+	fill:	none;
+}
+.style14{
+	stroke:	#FFFFFF;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style15{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0653;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style16{
+	stroke:	#FFFFFF;
+	stroke-width:	0.966;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style17{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9186;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style18{
+	stroke:	#FFFFFF;
+	stroke-width:	0.982;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style19{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0461;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
 
-	}
-	.style37{
-		stroke:	#FFF;
-		stroke-width:	1.6499px;
-		stroke-miterlimit:	10px;
-		fill:	#FFF;
+.style20{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0516;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style21{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9813;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style22{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0454;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style23{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9387;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style24{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0154;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style25{
+	stroke:	#FFFFFF;
+	stroke-width:	0.9532;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style26{
+	opacity:	0.94;
+	stroke:	#FFFFFF;
+	stroke-miterlimit:	10;
+	fill:	none;
+}
+.style27{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0198;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style28{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0864;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style29{
+	stroke:	#000000;
+	stroke-width:	0.6415;
+	stroke-miterlimit:	10;
+	fill:	none;
+}
 
-	}
-	.style38{
-		stroke:	#FFFFFF;
-		stroke-width:	1.804;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style39{
-		stroke:	#FFFFFF;
-		stroke-width:	1.9218;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	
-	.style40{
-		stroke:	#FFFFFF;
-		stroke-width:	1.6031;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style41{
-		stroke:	#FFFFFF;
-		stroke-width:	1.7078;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style42{
-		stroke:	#FFFFFF;
-		stroke-width:	1.7854;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style43{
-		stroke:	#FFFFFF;
-		stroke-width:	1.8522;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style44{
-		stroke:	#FFFFFF;
-		stroke-width:	1.7613;
-		stroke-miterlimit:	10;
-		fill:	#FFFFFF;
-	}
-	.style45{
-		font-size:	12px;
-		font-family:	'MyriadPro-Regular';
-		letter-spacing:	4.5;
-	}
-	.style46{
-		font-size:	14px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style47{
-		font-size:	12.5001px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style48{
-		font-size:	8px;
-		font-family:	'MyriadPro-Bold';
-	}
-	.style49{
-		font-size:	9.6331px;
-		font-family:	'MyriadPro-Bold';
-	}
+.style30{
+	stroke:	#000000;
+	stroke-width:	1.1405;
+	stroke-miterlimit:	10;
+	fill:	none;
+}
+.style31{
+	stroke:	#FFFFFF;
+	stroke-width:	1.008;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style32{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0738;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style33{
+	stroke:	#FFFFFF;
+	stroke-width:	1.0138;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style34{
+	opacity:	0.5;
+	fill:	#808080;
+}
+.style35{
+	opacity:	0;
+}
+.style36{
+	stroke:	#FFF;
+	stroke-width:	1px;
+	stroke-miterlimit:	1px;
+	fill:	#FFF;
+
+}
+.style37{
+	stroke:	#FFF;
+	stroke-width:	1.6499px;
+	stroke-miterlimit:	10px;
+	fill:	#FFF;
+
+}
+.style38{
+	stroke:	#FFFFFF;
+	stroke-width:	1.804;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style39{
+	stroke:	#FFFFFF;
+	stroke-width:	1.9218;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+
+.style40{
+	stroke:	#FFFFFF;
+	stroke-width:	1.6031;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style41{
+	stroke:	#FFFFFF;
+	stroke-width:	1.7078;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style42{
+	stroke:	#FFFFFF;
+	stroke-width:	1.7854;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style43{
+	stroke:	#FFFFFF;
+	stroke-width:	1.8522;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style44{
+	stroke:	#FFFFFF;
+	stroke-width:	1.7613;
+	stroke-miterlimit:	10;
+	fill:	#FFFFFF;
+}
+.style45{
+	font-size:	12px;
+	font-family:	'MyriadPro-Regular';
+	letter-spacing:	4.5;
+}
+.style46{
+	font-size:	14px;
+	font-family:	'MyriadPro-Bold';
+}
+.style47{
+	font-size:	12.5001px;
+	font-family:	'MyriadPro-Bold';
+}
+.style48{
+	font-size:	8px;
+	font-family:	'MyriadPro-Bold';
+}
+.style49{
+	font-size:	9.6331px;
+	font-family:	'MyriadPro-Bold';
+}
+#puck{
+	fill: #999;
+	stroke:#000;
+	stroke-width:2;
+}
+#Chip{
+	fill: #990000;
+	stroke:#000;	
+}
+.clicked{
+	fill: #876;
+	opacity: .2;
+}
 .clickrect{
 	fill: #FFF;
-	opacity: .05;
+	opacity: .01;
 	stroke: none;
-	
 }
+.circleden{
+	fill:none;
+	stroke:#990000;
+}
+.textden{
+	font-size: .75em;
+}
+.textfit{
+	
+	font-size: .45em;
+}
+.textden, .textfit{
+	stroke:#454;
+	stroke-width: .5;
+}
+
 
 	
