@@ -1,13 +1,14 @@
 "use strict";
 
-var jsondata; 
+var jsondata,
+	betobj = {},
+	tip = d3.tip(),
+	d3_svg = d3.select('svg').call(tip);
 //All the data for payouts winning and losing numbers are stored here
 	$.getJSON("JSON_Craps.json",function(data){
 		jsondata = data;
 		
 	});
-//object for all the bets
-var betobj = {};
 
 window.onload = function () {
 	//Functionality wrapped in knockout function
@@ -16,11 +17,10 @@ var viewModel = function() {
 	var self = this;
 	self.removal= ko.observable(false);
 	self.denomination = ko.observable(0);
-	self.allbets = ko.observableArray();
+	self.point = ko.observable(0);
 	self.firstdie = ko.observable();
 	self.seconddie = ko.observable();
-	self.min = ko.observable(5);
-	self.minbet = ko.observable(6);
+	
 	self.bank = ko.observable(1000);
 	self.total = ko.observable(0);
 
@@ -47,19 +47,19 @@ var viewModel = function() {
 		};
 	};
 	self.svgtogclass = function(id, arr, classname){
-		var svg = d3.select('svg');
 		//takes array and removes a class
 		if(Array.isArray(arr)){
 			arr.forEach(function(item, index, array){
-				var needclass = svg.select("." + item);
+				var needclass = d3_svg.select("." + item);
 				needclass.classed(classname, false);
 			});
 		};
 		//toggles the class on the lone target
-		svg.select("." + id).classed(classname, !svg.select("." + id).classed(classname));
+		d3_svg.select("." + id).classed(classname, !d3_svg.select("." + id).classed(classname));
 	};
 	self.addbet = function (id, target, wager){
-
+		var target = target || null;
+		
 		if (jsondata[id] && wager !=0){
 
 			var wager = wager,
@@ -82,19 +82,23 @@ var viewModel = function() {
 				self.addbettoobj(jsondata[id]['Loss'],wager);
 				self.addbettoobj(jsondata[id]['Win'], winwager);
 				//update total bets and bankroll
-				self.total(self.total()+wager);
-				self.bank(self.bank()-wager);
-				self.bank() < 4 ? alert("Remove some bets to continue") : null;
+				
 			};
 		}
 	};
+	self.tally = function(tallyamount){
+		var wager = tallyamount;
+		
+		self.total(self.total()+wager);
+		self.bank(self.bank()-wager);
+		self.bank() < 4 ? alert("Remove some bets to continue") : null;
+	}
 	self.chip = function(id,target,wager){
 			
-		var svg_loc = d3.select('svg'),
-			chip_class = "Chip__" + id,
+		var chip_class = "Chip__" + id,
 			checkwager = wager,
 		//Chip is classed for easy removal
-			chip = svg_loc.select("." + chip_class);
+			chip = d3_svg.select("." + chip_class);
 
 		//if chip is in the nest array or not
 		if(!chip[0][0]){
@@ -104,12 +108,18 @@ var viewModel = function() {
 				var x = target.x.baseVal.value + target.width.baseVal.value / 2,
 					y = target.y.baseVal.value + target.height.baseVal.value / 2;
 
-				svg_loc.append('use').datum(wager)
+				d3_svg.append('use').datum(wager)
 					.attr({
 						"xlink:href":"#Chip",
 						"x":x, 
 						"y":y})
-					.classed(chip_class, true);
+					.classed(chip_class, true)
+					.on('mouseover', function(d) 
+						{tip.attr('class','d3-tip')
+							.html(function(){return '<span>'+ '$' + d + '</span>'})
+							.show(d, target);
+						})
+					.on('mouseout', function(d) {tip.hide(d, target)});
 				}else{
 				//make sure nothing is put in the object of bets
 					checkwager = 0;
@@ -120,6 +130,7 @@ var viewModel = function() {
 			chip.datum(function(d,i){checkwager = d; return wager + d;})
 			//remove if zero
 			if(chip.datum() <= 0){
+				chip.datum(0);
 				chip.remove();
 			};
 		};		
@@ -139,8 +150,57 @@ var viewModel = function() {
 	};
 	
 	//Roll portion of code
-
+	self.clear = function(){
 		
+		self.removal(true);
+		var allids = d3_svg.selectAll('use')[0];
+		
+		(allids.length > 0) ? 
+			allids.forEach(function(item, index, array){
+				var nonstripclass = d3.select(item).attr('class').slice(6);
+				self.addbet(nonstripclass,null,1000);
+		}) : 
+			alert('You have no bets to reset');	
+		
+		self.svgtogclass('remove', ['remove'], 'clicked');
+		};
+
+	self.roll = function(){
+		self.firstdie(self.die());
+		self.seconddie(self.die());
+		var dice = self.firstdie() + self.seconddie(),
+			hard = (self.firstdie() === self.seconddie()) ? true : false;
+//		self.suggestcount(dice);
+		self.movepuck(dice);
+		
+		
+	};
+	self.die = function(){
+		return Math.floor(Math.random() * (6)) + 1;
+	};
+
+	self.movepuck = function(dice){
+		var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4},
+			puck = d3_svg.select("#puck");
+		
+		if (dice === self.point() || dice === 7){
+			puck.transition().delay(350).attr('cx', 300.4);
+			
+			self.point(0);
+		}else if (dice > 3 && dice < 11 && self.point()=== 0){
+			self.point(dice);
+			
+			puck.datum(self.point()).on('mouseover',function(d){
+				tip.attr('class', 'd3-tip')
+					.html(function(){return '<span>' + d + '</span>'})
+					.show(d,this);
+			})
+			.on('mouseout',function(d){
+				tip.hide(d,this)
+			}).transition().delay(350).ease('linear').attr('cx', coord[dice]);
+			
+		};
+	};
 		
 			
 	}
