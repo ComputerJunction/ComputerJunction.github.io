@@ -16,6 +16,7 @@
 	<link rel="icon" href="images/favicon.ico">
 	<link rel="stylesheet" href="css/board_svg.css">
 	<link rel="stylesheet" href="css/game.css">
+	<link rel="stylesheet" href="css/example-styles.css">
 	
 </head>
 
@@ -671,14 +672,12 @@
 		
 		<article class="col-lg-2 col-md-2-block col-sm-2-block col-xs-2-block skyblue" id="betbox">
 			<div class="well"> 
-				<h5 data-bind="text:allbets()"></h5>
 				
 				<h5>Bankroll: $<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: $<span data-bind="text:total()"></span></h5>
-				
+				 <button id="rollhere" type="button" class="btn btn-primary btn-sm" data-bind="click:roll">ROLL</button>
+				<button type="button" class="btn btn-primary btn-sm" data-bind="click:clear">RESET ALL</button>
 			</div>
-			
-			
 		</article>
 	</section>
 	
@@ -690,6 +689,7 @@
 	<script type="text/javascript" src="scripts/Jquery/jquery-2.1.4.min.js"></script>
 	<script type="text/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="scripts/D3JS/d3.min.js"></script>
+	<script type="text/javascript" src="scripts/D3JS/Tooltipplugin/JPd3tip.js"></script>
 	<script type="text/javascript" src="scripts/Knockout/knockout-3.3.0.js"></script>
 	<script type="text/ecmascript" src="scripts/BoardJS/BoardJSredux.js"></script>
 </body>
