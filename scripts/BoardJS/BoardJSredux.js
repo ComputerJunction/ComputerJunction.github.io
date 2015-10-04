@@ -48,14 +48,16 @@ var viewModel = function() {
 	};
 	self.svgtogclass = function(id, arr, classname){
 		//takes array and removes a class
+		var id = id || null, classname = classname || null;
+		
 		if(Array.isArray(arr)){
 			arr.forEach(function(item, index, array){
 				var needclass = d3_svg.select("." + item);
-				needclass.classed(classname, false);
+				needclass.classed(classname, true);
 			});
 		};
 		//toggles the class on the lone target
-		d3_svg.select("." + id).classed(classname, !d3_svg.select("." + id).classed(classname));
+		if(id) d3_svg.select("." + id).classed(classname, !d3_svg.select("." + id).classed(classname));
 	};
 	self.addbet = function (id, target, wager){
 		var target = target || null;
@@ -79,20 +81,13 @@ var viewModel = function() {
 			}
 
 			if(wager != 0){
-				self.addbettoobj(jsondata[id]['Loss'],wager);
+				self.addbettoobj(jsondata[id]['Loss'],-wager);
 				self.addbettoobj(jsondata[id]['Win'], winwager);
 				//update total bets and bankroll
-				
+				self.tally(wager);
 			};
 		}
 	};
-	self.tally = function(tallyamount){
-		var wager = tallyamount;
-		
-		self.total(self.total()+wager);
-		self.bank(self.bank()-wager);
-		self.bank() < 4 ? alert("Remove some bets to continue") : null;
-	}
 	self.chip = function(id,target,wager){
 			
 		var chip_class = "Chip__" + id,
@@ -114,11 +109,18 @@ var viewModel = function() {
 						"x":x, 
 						"y":y})
 					.classed(chip_class, true)
+					.style('fill', function(d,i)
+						 {
+							
+							if(d===5) {return'#9f0'};
+							if(d===25) {return '#FF0DFF'};
+							if(d===100) {return '#17F'};
+						;})
 					.on('mouseover', function(d) 
 						{tip.attr('class','d3-tip')
 							.html(function(){return '<span>'+ '$' + d + '</span>'})
-							.show(d, target);
-						})
+							.show(d, target)
+						;})
 					.on('mouseout', function(d) {tip.hide(d, target)});
 				}else{
 				//make sure nothing is put in the object of bets
@@ -127,7 +129,16 @@ var viewModel = function() {
 
 		}else{
 			//update data for accurate counting of wager on specific bet
-			chip.datum(function(d,i){checkwager = d; return wager + d;})
+			chip.datum(function(d,i)
+					   {
+						checkwager = d; return wager + d;
+					   })
+				.style('fill', function(d,i)
+					   {
+						if(d < 25) {return'#9f0'};
+						if(d >= 25 && d < 100) {return '#FF0DFF'};
+						if(d >= 100) {return '#17F'};
+						});
 			//remove if zero
 			if(chip.datum() <= 0){
 				chip.datum(0);
@@ -138,7 +149,6 @@ var viewModel = function() {
 			
 	};
 	self.addbettoobj = function(arr, wager){
-
 		arr.forEach(function (item, index, array){
 
 			if(!betobj.hasOwnProperty(item)) {
@@ -148,21 +158,29 @@ var viewModel = function() {
 		});
 		console.info(betobj);
 	};
+	self.tally = function(wager){
+		var wager = wager || 0;
+		
+		self.total(self.total()+ wager);
+		self.bank(self.bank()- wager);
+		
+		self.bank() < 4 ? alert("Remove some bets to continue") : null;
+	}
 	
 	//Roll portion of code
 	self.clear = function(){
-		
 		self.removal(true);
 		var allids = d3_svg.selectAll('use')[0];
 		
 		(allids.length > 0) ? 
 			allids.forEach(function(item, index, array){
 				var nonstripclass = d3.select(item).attr('class').slice(6);
-				self.addbet(nonstripclass,null,1000);
-		}) : 
+				self.addbet(nonstripclass,null,1000);}) 
+		: 
 			alert('You have no bets to reset');	
 		
-		self.svgtogclass('remove', ['remove'], 'clicked');
+		self.svgtogclass(null, ['remove'], 'clicked');
+		self.removal(false);
 		};
 
 	self.roll = function(){
@@ -178,7 +196,6 @@ var viewModel = function() {
 	self.die = function(){
 		return Math.floor(Math.random() * (6)) + 1;
 	};
-
 	self.movepuck = function(dice){
 		var coord = {4:342.4,5:367.4,6:392.4,8:417.4,9:442.4,10:467.4},
 			puck = d3_svg.select("#puck");
