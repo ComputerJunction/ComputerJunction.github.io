@@ -280,32 +280,43 @@
 	stroke-width:2;
 }
 #Chip{
-	fill: #990000;
+/*	fill: #990000;*/
 	stroke:#000;	
-}
-.clicked{
-	fill: #876;
-	opacity: .2;
 }
 .clickrect{
 	fill: #FFF;
-	opacity: .01;
+	opacity: 0;
 	stroke: none;
 }
-.circleden{
+.clicked{
+	opacity:.1;
+}
+.five{
+	stroke:#9f0;
+	fill:rgba(153,255,0,.5);
+}
+.remove{
 	fill:none;
-	stroke:#990000;
+	stroke:#000;
+	stroke-width:2;
+}
+.twentyfive{
+	stroke:#FF0DFF;
+	fill:rgba(255,13,255,.5);
+}
+.onehundred{
+	stroke:#17F;
+	fill:rgba(17,119,255,.5);
 }
 .textden{
 	font-size: .75em;
 }
 .textfit{
-	
 	font-size: .45em;
 }
 .textden, .textfit{
 	stroke:#454;
-	stroke-width: .5;
+	stroke-width: .2;
 }
 
 

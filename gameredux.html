@@ -68,27 +68,27 @@
 				
 				<text x="0.5" class="textfit">
 					<tspan x="7.5" y="60">Click chips</tspan>
-					<tspan x="7.5" dy="5"> below before betting</tspan>
+					<tspan x="7.5" dy="7"> below before betting</tspan>
 				</text>
 			
 				<g transform="translate(32.5, 90)">
-					<circle r="10" class="circleden remove"/>
-					<text dx="-8" class="textfit">
+					<circle r="14" class="remove clicked"/>
+					<text dx="-11" class="textfit">
 						<tspan>Remove</tspan>
-						<tspan dx="-22" dy="5">Bets</tspan>
+						<tspan dx="-22" dy="7">Bets</tspan>
 					</text>
 				</g>
 				
 				<g transform="translate(32.5, 120)">
-					<circle r="10" class="circleden five"/>
+					<circle r="10" class="five clicked"/>
 					<text dy="+4" dx="-3" class="textden">5</text>
 				</g>
 				<g transform="translate(32.5, 150)">
-					<circle r="10" class="circleden twentyfive"/>
+					<circle r="10" class="twentyfive clicked"/>
 					<text dy="+3.5" dx="-5.5" class="textden">25</text>
 				</g>
 				<g transform="translate(32.5, 180)">
-					<circle r="10" class="circleden onehundred"/>
+					<circle r="10" class="onehundred clicked"/>
 					<text dy="4" dx="-9" class="textden">100</text>
 				</g>
 				
@@ -675,7 +675,7 @@
 				
 				<h5>Bankroll: $<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: $<span data-bind="text:total()"></span></h5>
-				 <button id="rollhere" type="button" class="btn btn-primary btn-sm" data-bind="click:roll">ROLL</button>
+				 <button id="rollhere" type="button" class="btn btn-primary btn-sm" data-bind="click:roll, disable:bank() < 4 || total < 4">ROLL</button>
 				<button type="button" class="btn btn-primary btn-sm" data-bind="click:clear">RESET ALL</button>
 			</div>
 		</article>
