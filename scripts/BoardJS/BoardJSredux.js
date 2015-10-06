@@ -45,6 +45,15 @@ var viewModel = function() {
 			
 			if(jsondata[id] && self.denomination() > 0 || self.bets[id]){
 				
+				if(self.passcomecheck(id)){
+					
+					if(['Come_Ten', 'Come_Nine', 'Come_Eight', 'Come_Six', 'Come_Five', 
+						'Come_Four','Dont_Come_Ten', 'Dont_Come_Nine', 'Dont_Come_Eight', 
+						'Dont_Come_Six', 'Dont_Come_Five', 'Dont_Come_Four'].indexOf(id) =! -1){
+						id = id + "_Odds";
+						target = d3.select(id);
+					}
+				
 					if(id == "Place_Six" || id == "Place_Eight"){
 						var prev_den = self.denomination();
 						if(self.denomination() > 5) {
@@ -71,9 +80,28 @@ var viewModel = function() {
 							self.denomination(prev_den);
 						}else{self.denomination(5)};
 					}
-				
+				};
 			};
 		};
+	};
+	self.passcomecheck = function(id){
+		var placechip = true;
+		
+		if (['Pass_Line', 'Dont_Pass_Line','Pass_Line_Odds', 
+			 'Dont_Pass_Line_Odds', 'Come', 'Dont_Come'].indexOf(id) != -1){
+		
+			if(['Pass_Line', 'Dont_Pass_Line'].indexOf(id) != -1){
+				placechip = self.point() === 0;
+			}else if (['Come', 'Dont_Come'].indexOf(id) != -1){
+				placechip = self.point() > 0;
+			}else if(['Pass_Line_Odds', 'Dont_Pass_Line_Odds'].indexOf(id) != -1){
+				placechip = self.bets().includes('Pass_Line') || self.bets().includes('Dont_Pass_Line');
+			}
+//				else{
+//				placechip = self.bets().includes('Come') || self.bets().includes('Dont_Come');
+//			}
+		}
+		return placechip;
 	};
 	self.svgtogclass = function(id, arr, classname){
 		//takes array and removes a class
@@ -173,6 +201,7 @@ var viewModel = function() {
 			hard = (self.firstdie() === self.seconddie()) ? true : false;
 //		self.suggestcount(dice);
 		self.movepuck(dice);
+		self.movecomebets(dice);
 		self.netresults(dice);
 		
 	};
@@ -201,6 +230,30 @@ var viewModel = function() {
 			
 		};
 	};
+	self.movecomebets(dice){
+		var comerects =  {4:'Come_Four', 5:'Come_Five',6:'Come_Six',8:'Come_Eight',9:'Come_Nine',10:'Come_Ten'};
+
+		if(self.bets().includes('Come')){
+			var targetid = comerects[dice];
+			//select the come chip via d3 select('Come')
+			var betamt = d3.select('#Come').datum();
+			//transfer the datum to the chip function
+			self.chip(targetid,d3.select("#"+targetid) ,betamt);
+			d3.select('#Come').datum(0);
+			self.chip('#Come', d3.select('#Come'), 0)
+			//pass it the target, id , datum
+			
+			
+		}else if(self.bets().includes('Dont_Come')){
+			//select the dont come chip via d3
+			var targetid = comerects[dice];
+			var betamt = d3.select('#Dont_Come').datum();
+			//transfer the datum to the chip function
+			self.chip(targetid,d3.select("#Dont_"+targetid) ,betamt);
+			d3.select('#Dont_Come').datum(0);
+			self.chip('#Dont_Come', d3.select('#Dont_Come'), 0)
+		}
+	}
 	self.netresults = function(dice){
 		
 		self.net(0);

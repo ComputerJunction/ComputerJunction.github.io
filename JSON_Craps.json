@@ -47,6 +47,8 @@
 "Horn_Three": { "Payout":[15], "Percent":"6%", "Odds":"17 to 1", "EV":"$0.89", "Type":"Single Roll- Proposition", "Win":[3], "Loss":[2,4,5,6,8,7,9,10,11,12]},
 "Pass_Line": { "Payout":[1,1], "Percent":"49%", "Odds":"1 to 1", "EV":"$0.99", "Type":"Multiple Roll - Contract", "Win":[7,11], "Loss":[2,3,12]},
 "Dont_Pass_Line": { "Payout":[1,1], "Percent":"48%", "Odds":"1 to 1", "EV":"$0.99", "Type":"Multiple Roll - Non-Contract", "Win":[2,3], "Loss":[7,11]},
+"Pass_Line_Odds": { "Payout":[2,1.5,1.2,1.2,1.5,2], "Percent":"40%", "Odds":"2 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[10,9,8,6,5,4], "Loss":[7]},
+"Dont_Pass_Line_Odds": { "Payout":[0.5,0.67,0.83,0.83,0.67,0.5], "Percent":"60%", "Odds":"1 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[7], "Loss":[10,9,8,6,5,4]},
 "Field": { "Payout":[2,1,1,1,1,1,2], "Percent":"44%", "Odds":"2 to 1", "EV":"$0.94", "Type":"Single Roll", "Win":[2,3,4,9,10,11,12], "Loss":[5,6,7,8]},
 "CE_Split": { "Payout":[6,6,14,6], "Percent":"17%", "Odds":"5 to 1", "EV":"$0.78", "Type":"Single Roll- Proposition", "Win":[2,3,11,12], "Loss":[4,5,6,7,8,9,10]},
 "Hard_Ten": { "Payout":[7], "Percent":"11%", "Odds":"8 to 1", "EV":"$0.89", "Type":"Multiple Roll", "Win":[10], "Loss":[7]},
