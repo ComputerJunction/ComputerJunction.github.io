@@ -21,13 +21,11 @@
 </head>
 
 <body>
-	<section class="container-fluid">
-	<header class="header clearfix skyblue">
-			
+
+	<header class="skyblue">
 			<div class="navyblue">
-				<img class='pull-left' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
+				<img class='pull-left hidden-xs' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
 				<h1 class="cursive marquee hidden-xs">Craps Clever</h1>
-			</div>
 			
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -38,23 +36,24 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button> 
-						<p class="navbar-brand cursive marquee hidden-lg hidden-md hidden-sm visible-xs smallfont">Craps Clever</p>
+						<p role="presentation" class="navbar-brand cursive marquee hidden-lg hidden-md hidden-sm visible-xs smallfont">Craps Clever</p>
 						
 				</div>
 					<div class="collapse navbar-collapse" id="navcollapse">
 						<ul class="nav nav-pills">
 							<li role="presentation" ><a href="index.html">Home</a></li>
-<!--							<li role="presentation" ><a href="information.html">Information/Terms</a></li>-->
+
 							<li role="presentation"><a href="table.html">List of Bets</a></li>
 							<li role="presentation" class="active"><a href="board.html">Table Layout</a></li>
-<!--							<li role="presentation"><a href="#">Travel Blog</a></li>-->
+
 							<li role="presentation"><a href="gameredux.html">Practice Game</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
+		</div>
 		</header>
-	</section>
+
 
 	<div class="container-fluid">
 		<div class="col-xs-9-block col-sm-9-block col-md-9 col-lg-9">
@@ -697,7 +696,8 @@
 	</g>
 	</svg>
 		</div>
-			<div data-bind="html:info" class="well col-xs-3-block col-sm-3-block col-md-3 col-lg-3">
+		
+	<div data-bind="html:info" class="well col-xs-3-block col-sm-3-block col-md-3 col-lg-3">
 				
 		</div>
 

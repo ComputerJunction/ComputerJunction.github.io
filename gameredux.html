@@ -20,15 +20,13 @@
 	
 </head>
 
-<body>
+<body class="skyblue">
 
-	<section class="container-fluid skyblue">
-		<header class="header clearfix skyblue">
-			
+	
+		<header>
 			<div class="navyblue">
-				<img class='pull-left' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
+				<img class='pull-left hidden-xs' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
 				<h1 class="cursive marquee hidden-xs">Craps Clever</h1>
-			</div>
 			
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
@@ -52,10 +50,13 @@
 					</div>
 				</div>
 			</nav>
+			</div>
 		</header>
-		
+	
+		<section class="container-fluid">
 
-		<article class="col-lg-10 col-md-10-block col-sm-10-block col-xs-10-block gamearticle">
+		<article class="col-lg-10 col-md-10-block col-sm-10-block gamearticle">
+			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 215.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
 				<defs>
 					<g id="Chip">
 						<circle cy="1.75" r="2.75" />
@@ -230,6 +231,7 @@
 					<tspan x="0" y="0" class="style4">Don&#8217;t </tspan>
 					<tspan x="-0.3" y="10.8" class="style4">Come</tspan>
 				</text>
+				<rect id="Dont_Come" x="480.4" y="15" width="32.7" height="40" class="clickrect"/>
 					
 				<polygon points="497.9,163 330.5,163 330.5,106.5 513,106.5 513,145.7" class="style0"/>
 				<text id="FieldText" transform="matrix(1 0 0 1 403.2997 146.7681)" class="style6">Field</text>
@@ -686,7 +688,7 @@
 
 		</article>
 		
-		<article class="col-lg-2 col-md-2-block col-sm-2-block col-xs-2-block skyblue" id="betbox">
+		<article class="col-lg-2 col-md-2-block col-sm-2-block skyblue" id="betbox">
 			<div class="well"> 
 				
 				<h5>Bankroll: &#36;<span data-bind="text:bank()"></span></h5>
@@ -700,7 +702,7 @@
 	</section>
 	
 
-	<div class="container-fluid skyblue">
+	<div class="container-fluid">
 		<footer class="navyblue">This is the footer.</footer>
 	</div>
 
