@@ -19,7 +19,7 @@
 "Come_Four": { "Payout":[1], "Percent":"33%", "Odds":"2 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[4], "Loss":[7]},
 "Come_Five": { "Payout":[1], "Percent":"40%", "Odds":"2 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[5], "Loss":[7]},
 "Come_Six": { "Payout":[1], "Percent":"45%", "Odds":"2 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[6], "Loss":[7]},
-"Dont_Come": { "Payout":[1,1,0], "Percent":"48%", "Odds":"1 to 1", "EV":"$0.99", "Type":"Multiple Roll - Non-Contract", "Win":[2,3], "Loss":[7]},
+"Dont_Come": { "Payout":[1,1,0], "Percent":"48%", "Odds":"1 to 1", "EV":"$0.99", "Type":"Multiple Roll - Non-Contract", "Win":[2,3,12], "Loss":[7,11]},
 "Dont_Come_Ten": { "Payout":[1], "Percent":"67%", "Odds":"1 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[7], "Loss":[10]},
 "Dont_Come_Nine": { "Payout":[1], "Percent":"60%", "Odds":"4 to 3", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[7], "Loss":[9]},
 "Dont_Come_Eight": { "Payout":[1], "Percent":"55%", "Odds":"1 to 1", "EV":"$1", "Type":"Multiple Roll - Non-Contract", "Win":[7], "Loss":[8]},
