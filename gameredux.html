@@ -56,7 +56,7 @@
 		<section class="container-fluid">
 
 		<article class="col-lg-10 col-md-10-block col-sm-10-block gamearticle">
-			<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 215.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
+			<svg id="crapsboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 215.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
 				<defs>
 					<g id="Chip">
 						<circle cy="1.75" r="2.75" />
@@ -72,7 +72,7 @@
 				</text>
 			
 				<g transform="translate(32.5, 90)">
-					<circle r="14" class="remove clicked"/>
+					<circle r="14" class="removalcircle" data-bind="css:{clicked: removal()=== false}"/>
 					<text dx="-11" class="textfit">
 						<tspan>Remove</tspan>
 						<tspan dx="-22" dy="7">Bets</tspan>
@@ -80,15 +80,15 @@
 				</g>
 				
 				<g transform="translate(32.5, 120)">
-					<circle r="10" class="five clicked"/>
+					<circle r="10" class="five" data-bind="css:{clicked: denomination() === 0 || denomination() != 5, remove:denomination() === -5}"/>
 					<text dy="+4" dx="-3" class="textden">5</text>
 				</g>
 				<g transform="translate(32.5, 150)">
-					<circle r="10" class="twentyfive clicked"/>
+					<circle r="10" class="twentyfive" data-bind="css:{clicked: denomination() === 0 || denomination() != 25, remove:denomination() === -25 }"/>
 					<text dy="+3.5" dx="-5.5" class="textden">25</text>
 				</g>
 				<g transform="translate(32.5, 180)">
-					<circle r="10" class="onehundred clicked"/>
+					<circle r="10" class="onehundred" data-bind="css:{clicked: denomination() === 0 || denomination() != 100, remove:denomination() === -100}"/>
 					<text dy="4" dx="-9" class="textden">100</text>
 				</g>
 				
@@ -693,7 +693,7 @@
 				
 				<h5>Bankroll: &#36;<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: &#36;<span data-bind="text:total()"></span></h5>
-				<h5>Net: &#36;<span data-bind="text:net()"></span></h5>
+				<h5>Net: &#36;<span data-bind="text:bets()"></span></h5>
 				 <button id="rollhere" type="button" class="btn btn-primary btn-sm" data-bind="click:roll, disable:bank() < 4 || total < 4">ROLL</button>
 				<button type="button" class="btn btn-primary btn-sm" data-bind="click:clear">RESET ALL</button>
 			</div>

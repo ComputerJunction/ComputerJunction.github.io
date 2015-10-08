@@ -295,7 +295,7 @@
 	stroke:#9f0;
 	fill:rgba(153,255,0,.5);
 }
-.remove{
+.removalcircle{
 	fill:none;
 	stroke:#000;
 	stroke-width:2;
@@ -318,6 +318,12 @@
 	stroke:#454;
 	stroke-width: .2;
 }
-
-
+.remove{
+	fill:none;
+	stroke:#000;
+	stroke-width:2;
+}
+.remove{
+	opacity: 1;
+}
 	
