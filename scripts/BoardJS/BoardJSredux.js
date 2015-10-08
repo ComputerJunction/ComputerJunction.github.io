@@ -49,9 +49,9 @@ var viewModel = function() {
 					
 					if(['Come_Ten', 'Come_Nine', 'Come_Eight', 'Come_Six', 'Come_Five', 
 						'Come_Four','Dont_Come_Ten', 'Dont_Come_Nine', 'Dont_Come_Eight', 
-						'Dont_Come_Six', 'Dont_Come_Five', 'Dont_Come_Four'].indexOf(id) =! -1){
+						'Dont_Come_Six', 'Dont_Come_Five', 'Dont_Come_Four', 'Pass_Line', 'Dont_Pass_Line'].indexOf(id) != -1){
 						id = id + "_Odds";
-						target = d3.select(id);
+						target = d3_svg.select(id)[0][0];
 					}
 				
 					if(id == "Place_Six" || id == "Place_Eight"){
@@ -95,7 +95,7 @@ var viewModel = function() {
 			}else if (['Come', 'Dont_Come'].indexOf(id) != -1){
 				placechip = self.point() > 0;
 			}else if(['Pass_Line_Odds', 'Dont_Pass_Line_Odds'].indexOf(id) != -1){
-				placechip = self.bets().includes('Pass_Line') || self.bets().includes('Dont_Pass_Line');
+				placechip = self.bets().includes('Pass_Line') && self.point() != 0 || self.bets().includes('Dont_Pass_Line') && self.point() != 0;
 			}
 //				else{
 //				placechip = self.bets().includes('Come') || self.bets().includes('Dont_Come');
@@ -121,7 +121,7 @@ var viewModel = function() {
 		var chip_class = "Chip__" + id,
 		//Chip is classed for easy removal
 			chip = d3_svg.select("." + chip_class);
-
+		
 		//if chip is not in nested array create the chip on the board with styling and tooltip
 		if(!chip[0][0]){
 			//will the wager be negative or positve
@@ -201,8 +201,8 @@ var viewModel = function() {
 			hard = (self.firstdie() === self.seconddie()) ? true : false;
 //		self.suggestcount(dice);
 		self.movepuck(dice);
-		self.movecomebets(dice);
 		self.netresults(dice);
+		self.movecomebets(dice);
 		
 	};
 	self.die = function(){
@@ -230,28 +230,36 @@ var viewModel = function() {
 			
 		};
 	};
-	self.movecomebets(dice){
+	self.movecomebets = function(dice){
 		var comerects =  {4:'Come_Four', 5:'Come_Five',6:'Come_Six',8:'Come_Eight',9:'Come_Nine',10:'Come_Ten'};
 
+		
 		if(self.bets().includes('Come')){
 			var targetid = comerects[dice];
 			//select the come chip via d3 select('Come')
-			var betamt = d3.select('#Come').datum();
+			var chip = d3_svg.select('.Chip__Come');
 			//transfer the datum to the chip function
-			self.chip(targetid,d3.select("#"+targetid) ,betamt);
-			d3.select('#Come').datum(0);
-			self.chip('#Come', d3.select('#Come'), 0)
+			
+			self.chip(targetid,d3_svg.select("#"+targetid)[0][0], chip.datum());
+			chip.datum(0);
+			self.chip('Come', chip[0][0], 0);
+			self.bets.remove('Come');
+			self.bets().push(targetid);
 			//pass it the target, id , datum
 			
 			
-		}else if(self.bets().includes('Dont_Come')){
+		};
+		
+		if(self.bets().includes('Dont_Come')){
 			//select the dont come chip via d3
-			var targetid = comerects[dice];
-			var betamt = d3.select('#Dont_Come').datum();
+			var targetid = "Dont_" + comerects[dice];
+			var chip = d3_svg.select('.Chip__Dont_Come');
 			//transfer the datum to the chip function
-			self.chip(targetid,d3.select("#Dont_"+targetid) ,betamt);
-			d3.select('#Dont_Come').datum(0);
-			self.chip('#Dont_Come', d3.select('#Dont_Come'), 0)
+			self.chip(targetid,d3_svg.select("#"+targetid)[0][0], chip.datum());
+			chip.datum(0);
+			self.chip('Dont_Come', chip[0][0], 0);
+			self.bets.remove('Dont_Come');
+			self.bets().push(targetid)
 		}
 	}
 	self.netresults = function(dice){
@@ -259,9 +267,14 @@ var viewModel = function() {
 		self.net(0);
 		var net = 0, delarray = [];
 		
+		console.log(self.bets());
+		
 		self.bets().forEach(function (item, index, array){
+		console.log(item);
 			
 			var winloss = d3_svg.select('.Chip__'+item).datum();
+			
+			console.log(winloss);
 			
 			if(jsondata[item]['Loss'].includes(dice)){
 				
@@ -277,6 +290,11 @@ var viewModel = function() {
 					[jsondata[item]['Win'].indexOf(dice)] * winloss);
 						
 				self.bank(self.bank() + win);
+				if(item.slice(0,3) === 'Come' || item.slice(0,8) === 'Dont_Come'){
+					delarray.push(item);
+				}
+//				['Come'].indexOf(item) != -1 && ['7,11'].indexOf(dice) != -1 ? delarray.push(item): null ;
+//				['Dont_Come'].indexOf(item) != -1 && ['2,3,12'].indexOf(dice) != -1 ? delarray.push(item): null ;
 						 
 				net += win;
 			};	
