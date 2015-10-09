@@ -93,7 +93,7 @@ var viewModel = function() {
 		
 		self.point() === 0 ? null: 
 			
-			self.bets().includes(id) ? self.addoddstoid(id) : null;
+			self.bets().includes(id) ? self.addoddstoid(id) : placechip=false;
 	
 		return placechip;
 	};
