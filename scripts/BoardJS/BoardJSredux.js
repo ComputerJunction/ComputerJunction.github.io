@@ -339,22 +339,27 @@ window.onload = function () {
 			if(self.bets().includes('Come')){
 				var targetid = comerects[dice];
 				var chip = d3_svg.select('.Chip__Come');
-				self.denomination(chip.datum());
-				self.chip(targetid);
-				//pass it the target, id , datum
-				self.singleclear('Come', chip.datum())
-			};
-
-			if(self.bets().includes('Dont_Come')){
+				var name = 'Come';
+				var run = true;
+			}else if(self.bets().includes('Dont_Come')){
 				var targetid = "Dont_" + comerects[dice];
 				var chip = d3_svg.select('.Chip__Dont_Come');
+				var name = 'Dont_Come'
+				var run = true;
+			};
+				
+			if(run){
 				self.denomination(chip.datum());
 				self.chip(targetid);
 				//pass it the target, id , datum
-				self.singleclear('Dont_Come', chip.datum())
-
-
-			};
+				self.singleclear(name);
+				self.bank(self.bank() + self.denomination());
+				self.total(self.total() - self.denomination());
+				self.denomination(self.denom[self.textdenomination()]);
+				self.movecomebets(dice);
+			}
+			
+			
 		};
 		self.netresults = function(dice,net,hard){
 			
@@ -486,7 +491,7 @@ window.onload = function () {
 				self.winlist().forEach(function(item, index, array){
 					//The item is a Winloss object with amount as a property
 					total += item.amount;
-					console.log(item.amount);
+					
 				})
 			}
 			return total;
