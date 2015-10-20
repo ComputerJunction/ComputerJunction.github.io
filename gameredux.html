@@ -56,14 +56,14 @@
 		<section class="container-fluid">
 
 		<article class="col-lg-10 col-md-10-block col-sm-10-block gamearticle">
-			<svg id="crapsboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 215.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
+			<svg id="crapsboard" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 550.5 240.324" preserveAspectRatio="xMidyMid meet" data-bind="click:findid">
 				<defs>
 					<g id="Chip">
 						<circle cy="1.75" r="2.75" />
 					</g>
 				</defs>
 				
-				<circle cx="300.4" cy="6" r="6" id="puck"/>
+				<circle cx="300.4" cy="7" r="6" id="puck"/>
 				
 				
 				<text x="0.5" class="textfit">
@@ -698,6 +698,19 @@
 				
 				 <button id="rollhere" type="button" class="btn btn-primary btn-sm" data-bind="click:roll, disable:bank() < 4 || total < 4">ROLL</button>
 				<button type="button" class="btn btn-primary btn-sm" data-bind="click:clear">RESET ALL</button>
+			
+			<div class="well winlist" >
+				<ol data-bind="foreach:winlist">
+					<li> 
+						<span data-bind="text:$data.name"></span>
+						<em>&#58;</em> 
+						<em>&#36;</em>
+						<span data-bind="text:$data.amount"> </span>
+					</li>
+				</ol>
+				
+			</div>
+				<span>Session Total:&#36;</span><span data-bind="text:winlisttotal()"></span>
 			</div>
 			
 		</article>
@@ -705,6 +718,9 @@
 	
 
 	<div class="container-fluid">
+		<footer class="navyblue">
+			<p>Copyright Information</p>
+		</footer>
 	</div>
 
 	<script type="text/javascript" src="scripts/Jquery/jquery-2.1.4.min.js"></script>
