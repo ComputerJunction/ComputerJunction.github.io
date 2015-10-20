@@ -66,5 +66,13 @@ div[role="tabpanel"]{
 	-webkit-transition: 2s;
 }
 .smallfont{
-	font-size: 3em;
+	font-size: 2em;
 }
+.mobilefont{
+	font-size: .75em;
+	text-align: center;
+}
+header{
+	width:100%;
+}
+

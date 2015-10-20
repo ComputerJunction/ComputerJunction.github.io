@@ -2,35 +2,41 @@
 svg{
 	max-width: 100%;
 	max-height: 100%;
-/*	width: inherit;*/
-	height: inherit;
+	width: 100%;
 	background: white;
-	border: solid .35em;
+	
 }
 
-#puck{
-	fill: #999;
-	stroke:#000;
-	stroke-width:2;
-}
 .gamearticle{
-	max-height: 85%;
-	max-width: 90%;
+	max-height: 100%;
+	max-width: 100%;
 	padding: 1%;
 	min-width: 55%;
+	border: solid .35em;
 }
 .show{
 	opacity: 1;
 }
 
-#Chip{
-	fill: #990000;
-	stroke:#000;
-	
-}
 .suggest, .count{
 	width:200px;
 	height: 25px;
 	font-size: 9px;
 	border: solid red 2px;
+}
+
+.winlist{
+	border-collapse: collapse;
+	overflow: scroll;
+	margin: 11% 0 0 0;
+	border: solid brown 1.5px;
+	width: inherit;
+	height: 200px;
+	background: rgba(33,108,42, .4);
+	padding: 1%;
+}
+.winlist ol{
+	padding-left: 20px;
+	font-size: .75em;
+	
 }
