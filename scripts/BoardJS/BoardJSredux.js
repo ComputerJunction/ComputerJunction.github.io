@@ -190,7 +190,7 @@ window.onload = function () {
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
-				returnval = d + self.denomination();
+				returnval = self.denomination();
 				
 			};
 
