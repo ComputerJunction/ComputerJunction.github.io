@@ -24,3 +24,19 @@ svg{
 	font-size: 9px;
 	border: solid red 2px;
 }
+
+.winlist{
+	border-collapse: collapse;
+	overflow: scroll;
+	margin: 11% 0 0 0;
+	border: solid brown 1.5px;
+	width: inherit;
+	height: 200px;
+	background: rgba(33,108,42, .4);
+	padding: 1%;
+}
+.winlist ol{
+	padding-left: 20px;
+	font-size: .75em;
+	
+}
