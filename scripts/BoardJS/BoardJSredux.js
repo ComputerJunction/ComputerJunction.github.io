@@ -1,5 +1,28 @@
+var data;
+$.getJSON('JSON_Craps.json', function(data){
+	data = data;
+});
 
 window.onload = function () {
+	var board = document.getElementsByTagName('svg')[0],
+		wager = 10;
+	
+	function start(e){
+		var id = e.target.getAttribute('id');
+		console.log(e.target);
+//		if (data[id]  && wager){
+//			
+//			
+//			d3.select(svg).append('use').attr({
+//				"xlink":"href:#Chip",
+//				"x": e.target.x.baseVal + e.target.width.baseVal / 2,
+//				"y": e.target.y.baseVal + e.target.height.baseVal / 2
+//			});
+//			
+//		}
+	}
+	
+	board.addEventListener('click', start, true);
 
 	function viewModel() {
 				
