@@ -190,6 +190,7 @@ window.onload = function () {
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
+				
 				returnval = self.denomination();
 				
 			};
@@ -259,6 +260,7 @@ window.onload = function () {
 					self.bets.push(id)
 				: null;
 			}
+			console.log(self.bets())
 		};
 		self.singleclear = function(id){
 
@@ -460,16 +462,17 @@ window.onload = function () {
 							self.winlist.push(new self.Winloss(item, win));
 //							win = win + winloss; 
 							self.total(self.total() - winloss);
-							self.singleclear(item);					
+							self.singleclear(item);
+							self.bank(self.bank() + win);
 							self.netresults(dice,self.net());
 						}else{
 							
 							var win = Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
 						}
 						
-						self.winlist.push(new self.Winloss(item, win));
+						self.winlist().indexOf(item) != -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
 						self.net(self.net() + win);
-						self.bank(self.bank() + self.net());
+						self.bank(self.bank() + win);
 						
 					};
 					
