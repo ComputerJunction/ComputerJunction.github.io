@@ -17,6 +17,7 @@ window.onload = function () {
 		self.removal= ko.observable(false);
 		self.singleremove = false;
 		self.denomination = ko.observable(0);
+		self.winlist = ko.observableArray();
 		self.denom = {'five':5 , 'twentyfive':25, 'onehundred':100};
 		self.textdenomination = ko.observable("");
 		self.clickid = ko.observable("");
@@ -47,14 +48,17 @@ window.onload = function () {
 				self.removal(!self.removal());
 
 			}else if(jsondata[id] && self.denomination()){
+				
+				if(self.bankrollcheck()){
 
 					if(self.passcomecheck(id)){
 						//This is a check for odds bets
 						self.clickid() != id ? id = self.clickid() : null;
 
-	//					self.tally();
+	
 						self.chip(id);
 					};
+				};
 			};
 		};
 		self.remove = ko.computed(function() {
@@ -67,7 +71,23 @@ window.onload = function () {
 					self.denomination(self.denomination() - self.denomination()%6) : self.denomination(6)
 			:
 				self.denomination(self.denom[self.textdenomination()]);
-		});		
+		});
+		self.bankrollcheck = function(){
+			var check = true;
+			var nextamt = self.denomination();
+			
+			var nextbank = self.bank() - nextamt;
+			
+			if(nextbank <= 0){
+				window.alert('Please lower your bet amount, your bankroll is too low to make such a large wager');
+				check = false;
+				if(window.confirm("Want to just start again with $1000?"))
+				{self.clear();self.bank(1000); self.ev(0);self.total(0)}
+			}
+			
+			
+			return check;
+		};
 		self.passcomecheck = function(id){
 
 			var placechip = true,
@@ -153,23 +173,24 @@ window.onload = function () {
 				self.total(self.total() - d);
 				self.ev(self.ev() - d * Number(jsondata[id]['EV'].slice(1)));
 				returnval = -d;
-				console.info(returnval,'1');
+				
 			}else if(self.removal() && Math.abs(self.denomination()) < d && !self.singleremove){
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
 				returnval = self.denomination();
-				console.info(returnval,'2');
+				
 			}else if(self.singleremove){
 				self.ev(self.ev() - d * Number(jsondata[id]['EV'].slice(1)))
 				returnval = -d;
 				self.singleremove = false;
+				
 			}else if(!self.removal() && !self.singleremove){
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
 				returnval = d + self.denomination();
-				console.info(d,returnval, '3');
+				
 			};
 
 			return d + returnval;
@@ -295,6 +316,7 @@ window.onload = function () {
 				puck.transition().delay(350).attr('cx', 300.4);
 
 				self.point(0);
+				puck.datum(0);
 			}else if (dice > 3 && dice < 11 && self.point()=== 0){
 				self.point(dice);
 
@@ -334,16 +356,20 @@ window.onload = function () {
 			};
 		};
 		self.netresults = function(dice,net,hard){
+			
+			self.net(net);
 
 			if (self.bets().length > 0){
-
-				self.net(net);
+				
+				//This removeAll function returns an array so it could be useful in logging wins
+				self.winlist().length > 50 ? self.winlist.removeAll() : null; 
 
 				self.bets().forEach(function (item, index, array){
 
 					var winloss = d3_svg.select('.Chip__'+item).datum(),
-						loss_arr, win_arr, payout_arr,passpayout = false;
-
+						
+					loss_arr, win_arr, payout_arr, passpayout = false;
+					
 					if (self.point() != 0 && item === 'Pass_Line'){
 						loss_arr = [7]; 
 						win_arr = [self.point()];
@@ -352,10 +378,11 @@ window.onload = function () {
 					}else if(self.point() != 0 && item === 'Dont_Pass_Line'){
 						loss_arr = [self.point()];
 						win_arr = [7];
-						payout_arr = [1];		
+						payout_arr = [1];
+						passpayout = true;
 					}else if (self.point() != 0 && item === 'Pass_Line_Odds'){
-						loss_arr = [7]; 
 						win_arr = [self.point()];
+						loss_arr = [7];
 						payout_arr = jsondata[item]['Payout'];
 					}else if(self.point() != 0 && item === 'Dont_Pass_Line_Odds'){
 						loss_arr = [self.point()];
@@ -365,7 +392,8 @@ window.onload = function () {
 						loss_arr = jsondata[item]['Loss'];
 						win_arr = jsondata[item]['Win'];
 						payout_arr = jsondata[item]['Payout'];	
-					};				
+					};
+									
 					//if first three string are Har or Hop
 					//Win arr is one of the dice then one of the die
 					if(item.substr(0,4)==='Hard') { 
@@ -375,7 +403,7 @@ window.onload = function () {
 							loss_arr = jsondata[item]['Loss'], win_arr.pop();
 					}; 
 					
-					if(item.substr(0,3)==='Hop') {
+					if(item.substr(0,4)==='Hop_') {
 						
 						if(win_arr[0] === dice){
 							var needed_digit = jsondata[item]['HopDigit'][0];
@@ -385,9 +413,7 @@ window.onload = function () {
 								loss_arr.pop(dice)
 							: 
 								
-								win_arr.pop(dice) && console.log('Got There');
-						}else{
-							
+								win_arr.pop(dice)
 						}
 						
 					};
@@ -400,18 +426,17 @@ window.onload = function () {
 					};
 
 					if(loss_arr.includes(dice)){
-
+						
+						self.winlist.push(new self.Winloss(item, -winloss));
 						self.net(self.net() - winloss);
 						self.total(self.total() - winloss);
 						self.singleclear(item);
+						self.netresults(dice,self.net());
 						
 					};
 
 					if(win_arr.includes(dice)){
 						
-						
-						var win = passpayout ? winloss : Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
-
 						if(['Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds', 'Dont_Pass_Line_Odds', 
 							'Come', 'Dont_Come',
 						   'Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
@@ -420,26 +445,52 @@ window.onload = function () {
 						   'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds',
 							 'Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds',
 							  'Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds'].indexOf(item) != -1){
-
-							win = win + winloss; 
+							
+							item === 'Dont_Pass_Line_Odds' ? win_arr = jsondata[item]['Loss']: null;
+							item === 'Pass_Line_Odds' ? win_arr = jsondata[item]['Win']: null;
+							
+							var win = passpayout ? winloss : Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
+							
+							self.winlist.push(new self.Winloss(item, win));
+//							win = win + winloss; 
 							self.total(self.total() - winloss);
 							self.singleclear(item);					
+							self.netresults(dice,self.net());
+						}else{
 							
+							var win = Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
 						}
-
+						
+						self.winlist.push(new self.Winloss(item, win));
 						self.net(self.net() + win);
 						self.bank(self.bank() + self.net());
 						
 					};
 					
-
+					
 				});
 				
-				self.netresults(dice,self.net());
+				
 			};
 
-		};	
-
+		};
+		self.Winloss = function(betname, amount){
+		this.name = betname;
+		this.amount = amount;
+	};
+		self.winlisttotal = function(){
+			var total = 0;
+			if (self.winlist().length > 0){
+				
+				self.winlist().forEach(function(item, index, array){
+					//The item is a Winloss object with amount as a property
+					total += item.amount;
+					console.log(item.amount);
+				})
+			}
+			return total;
+		};
+		
 		}
 		ko.applyBindings(new viewModel());
 
