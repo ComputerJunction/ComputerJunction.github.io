@@ -471,7 +471,7 @@ window.onload = function () {
 							var win = Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
 						}
 						
-						self.winlist().indexOf(item) != -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
+						self.winlist().indexOf(item) === -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
 						self.net(self.net() + win);
 						self.bank(self.bank() + win);
 						
