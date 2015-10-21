@@ -13,12 +13,13 @@ window.onload = function () {
 
 		//Functionality wrapped in knockout function
 	var viewModel = function () {
-
+		//List of variables
 		var self = this;
 		self.removal= ko.observable(false);
 		self.singleremove = false;
 		self.denomination = ko.observable(0);
 		self.winlist = ko.observableArray();
+		self.repeatlist = ko.observableArray();
 		self.denom = {'five':5 , 'twentyfive':25, 'onehundred':100};
 		self.textdenomination = ko.observable("");
 		self.clickid = ko.observable("");
@@ -56,7 +57,6 @@ window.onload = function () {
 						//This is a check for odds bets
 						self.clickid() != id ? id = self.clickid() : null;
 
-	
 						self.chip(id);
 					};
 				};
@@ -260,7 +260,7 @@ window.onload = function () {
 					self.bets.push(id)
 				: null;
 			}
-			console.log(self.bets())
+			
 		};
 		self.singleclear = function(id){
 
@@ -303,6 +303,7 @@ window.onload = function () {
 			self.seconddie(self.die());
 			var dice = self.firstdie() + self.seconddie(),
 				hard = (self.firstdie() === self.seconddie()) ? true : false;
+			self.repeat();
 			self.netresults(dice,0, hard);
 			self.movepuck(dice);
 			self.movecomebets(dice);
@@ -486,7 +487,7 @@ window.onload = function () {
 		self.Winloss = function(betname, amount){
 		this.name = betname;
 		this.amount = amount;
-	};
+		};
 		self.winlisttotal = function(){
 			var total = 0;
 			if (self.winlist().length > 0){
@@ -498,6 +499,36 @@ window.onload = function () {
 				})
 			}
 			return total;
+		};
+		self.repeat = function(){
+			if (self.bets().length > 0){
+				
+				self.repeatlist().length > 0 && self.repeatlist.removeAll();
+				
+				self.bets().forEach(function(item, index, array){
+					var betamt = d3_svg.select('.Chip__'+item).datum();
+					self.repeatlist.push(new self.Winloss(item,betamt))
+				})
+			};
+		};
+		self.betrepeat = function(){
+			
+			if(self.repeatlist().length > 0){
+				
+				self.repeatlist().forEach(function(item, index, array){
+					
+					var name = item.name, amt = item.amount;
+					if (!self.bets().includes(name)){
+						
+						self.removal(false);
+						self.denomination(amt);
+						self.chip(name);
+						self.denomination(self.denom[self.textdenomination()]);
+						self.repeatlist.remove(item);
+						self.betrepeat();
+						} ;
+				})
+			}
 		};
 		
 		}
