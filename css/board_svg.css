@@ -326,4 +326,8 @@
 .remove{
 	opacity: 1;
 }
-	
+.hover{
+	fill:rgba(15,255,0,.4);
+	stroke:rgba(15,255,0,1);
+	opacity: 1;
+}

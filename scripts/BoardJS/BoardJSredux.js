@@ -9,7 +9,14 @@ window.onload = function () {
 	//All the data for payouts winning and losing numbers are stored here
 		$.getJSON("JSON_Craps.json", function (data) {
 			jsondata = data;
+		$.each(jsondata, function(key,val){
+			var svg_loc = d3.select(document.body).select('svg')
+			svg_loc.select("#"+key)
+				.on('mouseover', function(d,i){d3.select(this).classed('hover',true);})
+				.on('mouseout', function(d,i){d3.select(this).classed('hover',false);})
 		});
+			});
+			
 
 		//Functionality wrapped in knockout function
 	var viewModel = function () {
@@ -50,7 +57,7 @@ window.onload = function () {
 				self.removal(!self.removal());
 
 			}else if(jsondata[id] && self.denomination()){
-				
+								
 				if(self.bankrollcheck()){
 
 					if(self.passcomecheck(id)){

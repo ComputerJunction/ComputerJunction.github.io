@@ -9,6 +9,7 @@ window.onload = function () {
 				$.each(data, function(key,val){
 					var svg_loc = d3.select(document.body).select('svg')
 					svg_loc.select("#"+key).datum(val).on('mouseover', function(d,i){
+						d3.select(this).classed('hover',true);
 						return self.info(
 						//Make this a table
 							"<table class='table table-bordered'>" + 
@@ -34,7 +35,8 @@ window.onload = function () {
 							"</table>"
 						//Make blurb in span)
 						);
-					});
+					}).on('mouseout', function(d,i){d3.select(this).classed('hover',false);});
+					
 				});
 			})
 	};
