@@ -510,9 +510,12 @@ window.onload = function () {
 		self.repeat = function(){
 			if (self.bets().length > 0){
 				
+				
 				self.repeatlist().length > 0 && self.repeatlist.removeAll();
 				
 				self.bets().forEach(function(item, index, array){
+					if item.slice(-4) == 'Odds': return;
+					
 					var betamt = d3_svg.select('.Chip__'+item).datum();
 					self.repeatlist.push(new self.Winloss(item,betamt))
 				})
