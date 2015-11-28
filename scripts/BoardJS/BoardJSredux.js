@@ -527,12 +527,10 @@ window.onload = function () {
 				
 				self.repeatlist().forEach(function(item, index, array){
 					
-					
-					
 					var name = item.name, amt = item.amount;
 					
 					if (!self.bets().includes(name)){
-						console.info(name);
+						
 						if (name.slice(-4) == 'Odds'){ return;}
 						self.removal(false);
 						self.denomination(amt);
