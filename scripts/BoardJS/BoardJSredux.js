@@ -530,9 +530,10 @@ window.onload = function () {
 					
 					
 					var name = item.name, amt = item.amount;
+					
 					if (!self.bets().includes(name)){
-						console.info('hello');
-						if name.slice(-4) == 'Odds': return;
+						console.info(name);
+						if (name.slice(-4) == 'Odds'){ return;}
 						self.removal(false);
 						self.denomination(amt);
 						self.chip(name);
