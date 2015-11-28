@@ -514,7 +514,7 @@ window.onload = function () {
 				self.repeatlist().length > 0 && self.repeatlist.removeAll();
 				
 				self.bets().forEach(function(item, index, array){
-					if item.slice(-4) == 'Odds': return;
+					
 					
 					var betamt = d3_svg.select('.Chip__'+item).datum();
 					self.repeatlist.push(new self.Winloss(item,betamt))
@@ -527,9 +527,12 @@ window.onload = function () {
 				
 				self.repeatlist().forEach(function(item, index, array){
 					
+					
+					
 					var name = item.name, amt = item.amount;
 					if (!self.bets().includes(name)){
-						
+						console.info('hello');
+						if name.slice(-4) == 'Odds': return;
 						self.removal(false);
 						self.denomination(amt);
 						self.chip(name);
