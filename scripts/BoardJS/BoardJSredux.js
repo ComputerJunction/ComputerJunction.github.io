@@ -3,6 +3,7 @@ window.onload = function () {
 	
 	'use strict';
 	
+	
 	var jsondata,
 		tip = d3.tip().attr('class', 'd3-tip').html(function(d) {return d; }),
 		d3_svg = d3.select('svg').call(tip);
@@ -17,7 +18,7 @@ window.onload = function () {
 		});
 			});
 			
-
+	
 		//Functionality wrapped in knockout function
 	var viewModel = function () {
 		//List of variables
@@ -305,7 +306,15 @@ window.onload = function () {
 
 		};
 	//Roll Portion of Code
+		self.diceroll = function(){
+			
+			TweenMax.to('svg #d1', Math.random()+1, {rotation:360, transformOrigin: "50% 50%", x:450, startAt:{x:0, rotation:-360}});
+			TweenMax.to('svg #d2', Math.random()+1, {rotation:360, transformOrigin: "50% 50%", x:450, startAt:{x:0, rotation:-360}});
+		
+
+		}
 		self.roll = function(){
+			self.diceroll();
 			self.firstdie(self.die());
 			self.seconddie(self.die());
 			var dice = self.firstdie() + self.seconddie(),
@@ -547,4 +556,10 @@ window.onload = function () {
 		ko.applyBindings(new viewModel());
 
 }
+
+//var w = d3.select('svg').width;
+//var h = d3.select('svg').height;
+
+		
+
 
