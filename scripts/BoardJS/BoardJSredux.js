@@ -23,28 +23,40 @@ window.onload = function () {
 	var viewModel = function () {
 		//List of variables
 		var self = this;
-		self.removal= ko.observable(false);
-		self.singleremove = false;
-		self.denomination = ko.observable(0);
-		self.winlist = ko.observableArray();
-		self.repeatlist = ko.observableArray();
-		self.denom = {'five':5 , 'twentyfive':25, 'onehundred':100};
-		self.textdenomination = ko.observable("");
-		self.clickid = ko.observable("");
-		self.point = ko.observable(0);
-		self.firstdie = ko.observable();
-		self.seconddie = ko.observable();
-		self.bets = ko.observableArray();
-		self.ev = ko.observable(0);
+		
 		self.bank = ko.observable(1000);
-		self.total = ko.observable(0);
+		self.bets = ko.observableArray();
+		
+		self.clickid = ko.observable("");
+		
+		self.denom = {'five':5 , 'twentyfive':25, 'onehundred':100};
+		self.denomination = ko.observable(0);
+		
+		self.ev = ko.observable(0);
+		
+		self.firstdie = ko.observable();
+		
 		self.net = ko.observable(0);
+		
+		self.point = ko.observable(0);
+		
+		self.removal= ko.observable(false);
+		self.repeatlist = ko.observableArray();
+		
+		self.total = ko.observable(0);
+		self.textdenomination = ko.observable("");
+		
+		self.seconddie = ko.observable();
+		self.singleremove = false;
+		
+		self.winlist = ko.observableArray();
+			
 	//Click graphic portion
 		self.findid = function(data, event){
 			//One click function for the entire SVG
 
-			var target = event.target || event.scrElement,
-				id = target.getAttribute('id');
+			var target = event.target || event.scrElement;
+			var id = target.getAttribute('id');
 
 			self.clickid(id);
 
@@ -70,6 +82,8 @@ window.onload = function () {
 				};
 			};
 		};
+		
+		
 		self.remove = ko.computed(function() {
 			self.removal() ? self.denomination(self.denomination() * -1) : self.denomination(Math.abs(self.denomination()));
 		});
@@ -381,13 +395,13 @@ window.onload = function () {
 			
 		};
 		self.netresults = function(dice,net,hard){
-			
+			console.log(self.bets()[0])
 			self.net(net);
 
 			if (self.bets().length > 0){
 				
 				//This removeAll function returns an array so it could be useful in logging wins
-				self.winlist().length > 50 ? self.winlist.removeAll() : null; 
+				//self.winlist().length > 50 ? self.winlist.removeAll() : null; 
 
 				self.bets().forEach(function (item, index, array){
 
@@ -462,14 +476,11 @@ window.onload = function () {
 
 					if(win_arr.includes(dice)){
 						
-						if(['Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds', 'Dont_Pass_Line_Odds', 
-							'Come', 'Dont_Come',
-						   'Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
+						var cntremove = ['Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds','Dont_Pass_Line_Odds','Come','Dont_Come','Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
 							 'Dont_Come_Four','Dont_Come_Five','Dont_Come_Six',
-							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten',
-						   'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds',
-							 'Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds',
-							  'Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds'].indexOf(item) != -1){
+							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten', 'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds','Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds',				'Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds']
+						
+						if(cntremove.indexOf(item) != -1){
 							
 							item === 'Dont_Pass_Line_Odds' ? win_arr = jsondata[item]['Loss']: null;
 							item === 'Pass_Line_Odds' ? win_arr = jsondata[item]['Win']: null;
@@ -488,6 +499,8 @@ window.onload = function () {
 						}
 						
 						self.winlist().indexOf(item) === -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
+						
+						self.singleclear(item);
 						self.net(self.net() + win);
 						self.bank(self.bank() + win);
 						
@@ -553,12 +566,10 @@ window.onload = function () {
 		};
 		
 		}
-		ko.applyBindings(new viewModel());
+		
+	ko.applyBindings(new viewModel());
 
 }
-
-//var w = d3.select('svg').width;
-//var h = d3.select('svg').height;
 
 		
 
