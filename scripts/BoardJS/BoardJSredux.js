@@ -503,7 +503,7 @@ window.onload = function () {
 						self.singleclear(item);
 						self.net(self.net() + win);
 						self.bank(self.bank() + win);
-						
+						self.netresults(dice,self.net());
 					};
 					
 					
