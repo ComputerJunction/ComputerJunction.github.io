@@ -501,8 +501,9 @@ window.onload = function () {
 						self.winlist().indexOf(item) === -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
 						
 						self.singleclear(item);
+						self.total(self.total() - winloss);
 						self.net(self.net() + win);
-						self.bank(self.bank() + win);
+						self.bank(self.bank() + win + winloss);
 						self.netresults(dice,self.net());
 					};
 					
