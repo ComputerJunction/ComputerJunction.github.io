@@ -705,6 +705,9 @@
 				
 				<button id="rollhere" type="button" class="btn btn-primary btn-block" data-bind="click:roll, disable:bank() < 4 || total < 4">ROLL</button>
 				<button id="ironcross" type="button" class="btn btn-primary btn-block" data-bind="click:ironcross">Iron Cross</button>
+				<button id="press" type="button" class="btn btn-success btn-block" data-bind="click:press, visible:crosset">Press</button>
+				<button id="parlay" type="button" class="btn btn-success btn-block" data-bind="click:parlay, visible:crosset">Parlay</button>
+				
 				<button type="button" class="btn btn-warning btn-block" data-bind="click:clear">RESET ALL</button>
 				<button id="repeathere" type="button" class="btn btn-success btn-block" data-bind="click:betrepeat, visible:repeatlist().length > 0">Repeat?</button>
 			
