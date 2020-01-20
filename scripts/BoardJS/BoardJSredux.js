@@ -479,7 +479,7 @@ window.onload = function () {
 						
 						var cntremove = ['Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds','Dont_Pass_Line_Odds','Come','Dont_Come','Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
 							 'Dont_Come_Four','Dont_Come_Five','Dont_Come_Six',
-							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten', 'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds','Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds',				'Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds']
+							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten', 'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds','Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds','Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds']
 						
 						if(cntremove.indexOf(item) != -1){
 							
@@ -568,6 +568,23 @@ window.onload = function () {
 		};
 		self.ironcross = function(){
 			self.crosset(!self.crosset());
+			var cross = ["Place_Five","Place_Six","Place_Eight","Field"]
+			
+			if(self.crosset()){
+				
+				for (bet in cross){
+					if bet === "Field {
+						self.denomination(10)
+					}else{
+						self.denomination(30)
+					}
+					self.chip(bet)
+				}	
+			
+			}else{
+				self.clear()
+			
+			}
 		}
 		
 		}
