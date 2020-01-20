@@ -573,7 +573,7 @@ window.onload = function () {
 			if(self.crosset()){
 				
 				for (bet in cross){
-					if bet === "Field {
+					if (bet === "Field) {
 						self.denomination(10)
 					}else{
 						self.denomination(30)
