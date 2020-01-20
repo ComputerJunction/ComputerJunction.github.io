@@ -49,6 +49,7 @@ window.onload = function () {
 		self.seconddie = ko.observable();
 		self.singleremove = false;
 		
+		self.crosset = false;
 		self.winlist = ko.observableArray();
 			
 	//Click graphic portion
@@ -565,6 +566,9 @@ window.onload = function () {
 				})
 			}
 		};
+		self.ironcross = function(){
+			self.crosset = True;
+		}
 		
 		}
 		
