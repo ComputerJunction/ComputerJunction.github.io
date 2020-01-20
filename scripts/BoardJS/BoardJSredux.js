@@ -50,6 +50,9 @@ window.onload = function () {
 		self.singleremove = false;
 		
 		self.crosset = ko.observable(false);
+		self.cross_press = ko.observable(false);
+		self.cross_parlay = ko.observable(false);
+		
 		self.winlist = ko.observableArray();
 			
 	//Click graphic portion
@@ -584,8 +587,17 @@ window.onload = function () {
 			
 			}else{
 				self.clear()
-			
+				self.cross_press(false)
+				self.cross_parlay(false)
 			}
+		}
+		self.parlay = function(){
+			self.cross_press(false)
+			self.cross_parlay(true)
+		}
+		self.press = function(){
+			self.cross_press(true)
+			self.cross_parlay(false)
 		}
 		
 		}
