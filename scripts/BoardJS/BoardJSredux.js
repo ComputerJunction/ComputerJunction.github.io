@@ -568,11 +568,12 @@ window.onload = function () {
 		};
 		self.ironcross = function(){
 			self.crosset(!self.crosset());
-			var cross = ["Place_Five","Place_Six","Place_Eight","Field"]
 			
 			if(self.crosset()){
+				var bet,
+				    cross = ["Place_Five","Place_Six","Place_Eight","Field"];
 				
-				for (var bet of cross){
+				for (bet of cross){
 					if (bet === "Field") {
 						self.denomination(10)
 					}else{
