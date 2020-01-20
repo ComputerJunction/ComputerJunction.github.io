@@ -567,7 +567,7 @@ window.onload = function () {
 			}
 		};
 		self.ironcross = function(){
-			!self.crosset();
+			self.crosset(!self.crosset());
 		}
 		
 		}
