@@ -601,8 +601,8 @@ window.onload = function () {
 		}
 		self.parlay = function(){
 				console.log(self.bets())
-				console.log(self.plfive())
-				console.log(self.plsixeight())
+				console.log(self.plfive)
+				console.log(self.plsixeight)
 			
 				self.clear();
 			
