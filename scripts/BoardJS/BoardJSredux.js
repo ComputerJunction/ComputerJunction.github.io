@@ -311,11 +311,12 @@ window.onload = function () {
 
 					}else if(['Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
 							 'Dont_Come_Four','Dont_Come_Five','Dont_Come_Six',
-							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten'].indexOf(item) != -1){null;//They can not be removed
+							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten'].indexOf(item) != -1){
 						null;//They can not be removed
 
-					}else{
 
+					}else{
+						console.log(item)
 						self.chip(item);
 	//					self.tally();
 						self.clear();
@@ -599,7 +600,10 @@ window.onload = function () {
 			}
 		}
 		self.parlay = function(){
-
+				console.log(self.bets())
+				console.log(self.plfive())
+				console.log(self.plsixeight())
+			
 				self.clear();
 			
 				self.plfive = self.plfive + 10;
