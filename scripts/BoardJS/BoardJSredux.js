@@ -600,23 +600,23 @@ window.onload = function () {
 			}
 		}
 		self.parlay = function(){
-				console.log(self.bets())
-				console.log(self.plfive)
-				console.log(self.plsixeight)
-			
+			var five = self.plfive, six = self.plsixeight;
+				self.ironcross();
 				self.clear();
 			
-				self.plfive = self.plfive + 10;
-				self.plsixeight = self.plsixeight + 6;
+				self.plfive = five + 10;
+				self.plsixeight = six + 6;
 			
 				self.ironcross();
 
 		}
 		self.press = function(){
+			var five = self.plfive, six = self.plsixeight;
+				self.ironcross();
 				self.clear();
 			
-				self.plfive = self.plfive + 5;
-				self.plsixeight = self.plsixeight + 6;
+				self.plfive = five + 5;
+				self.plsixeight = six + 6;
 
 				self.ironcross();
 			}
