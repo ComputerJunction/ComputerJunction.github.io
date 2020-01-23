@@ -1,9 +1,9 @@
 
 window.onload = function () {
-	
+
 	'use strict';
-	
-	
+
+
 	var jsondata,
 		tip = d3.tip().attr('class', 'd3-tip').html(function(d) {return d; }),
 		d3_svg = d3.select('svg').call(tip);
@@ -17,44 +17,47 @@ window.onload = function () {
 				.on('mouseout', function(d,i){d3.select(this).classed('hover',false);})
 		});
 			});
-			
-	
+
+
 		//Functionality wrapped in knockout function
 	var viewModel = function () {
 		//List of variables
 		var self = this;
-		
+
 		self.bank = ko.observable(1000);
 		self.bets = ko.observableArray();
-		
+
 		self.clickid = ko.observable("");
-		
+
 		self.denom = {'five':5 , 'twentyfive':25, 'onehundred':100};
 		self.denomination = ko.observable(0);
-		
+
 		self.ev = ko.observable(0);
-		
+
 		self.firstdie = ko.observable();
-		
+
 		self.net = ko.observable(0);
-		
+
 		self.point = ko.observable(0);
-		
+
 		self.removal= ko.observable(false);
 		self.repeatlist = ko.observableArray();
-		
+
 		self.total = ko.observable(0);
 		self.textdenomination = ko.observable("");
-		
+
 		self.seconddie = ko.observable();
 		self.singleremove = false;
-		
-		self.crosset = ko.observable(false);
-		self.cross_press = ko.observable(false);
-		self.cross_parlay = ko.observable(false);
-		
+
+		self.crosset = ko.observable(true);
+		self.cross_press = ko.observable(true);
+		self.cross_parlay = ko.observable(true);
+		self.fd = 10;
+		self.plfive = 30;
+		self.plsixeight = 30;
+
 		self.winlist = ko.observableArray();
-			
+
 	//Click graphic portion
 		self.findid = function(data, event){
 			//One click function for the entire SVG
@@ -74,7 +77,7 @@ window.onload = function () {
 				self.removal(!self.removal());
 
 			}else if(jsondata[id] && self.denomination()){
-								
+
 				if(self.bankrollcheck()){
 
 					if(self.passcomecheck(id)){
@@ -86,15 +89,15 @@ window.onload = function () {
 				};
 			};
 		};
-		
-		
+
+
 		self.remove = ko.computed(function() {
 			self.removal() ? self.denomination(self.denomination() * -1) : self.denomination(Math.abs(self.denomination()));
 		});
 		self.specialsixeight = ko.computed(function(){
 
-			self.clickid() === "Place_Six" || self.clickid() ==="Place_Eight" ? 
-				self.denomination() > 5 ? 
+			self.clickid() === "Place_Six" || self.clickid() ==="Place_Eight" ?
+				self.denomination() > 5 ?
 					self.denomination(self.denomination() - self.denomination()%6) : self.denomination(6)
 			:
 				self.denomination(self.denom[self.textdenomination()]);
@@ -102,28 +105,28 @@ window.onload = function () {
 		self.bankrollcheck = function(){
 			var check = true;
 			var nextamt = self.denomination();
-			
+
 			var nextbank = self.bank() - nextamt;
-			
+
 			if(nextbank <= 0){
 				window.alert('Please lower your bet amount, your bankroll is too low to make such a large wager');
 				check = false;
 				if(window.confirm("Want to just start again with $1000?"))
 				{self.clear();self.bank(1000); self.ev(0);self.total(0)}
 			}
-			
-			
+
+
 			return check;
 		};
 		self.passcomecheck = function(id){
 
 			var placechip = true,
-				alldependentbets = 
-				['Come_Ten', 'Come_Nine', 'Come_Eight', 'Come_Six', 'Come_Five', 
-				'Come_Four','Dont_Come_Ten', 'Dont_Come_Nine', 'Dont_Come_Eight', 'Dont_Come_Six', 
+				alldependentbets =
+				['Come_Ten', 'Come_Nine', 'Come_Eight', 'Come_Six', 'Come_Five',
+				'Come_Four','Dont_Come_Ten', 'Dont_Come_Nine', 'Dont_Come_Eight', 'Dont_Come_Six',
 				 'Dont_Come_Five', 'Dont_Come_Four', 'Come_Ten_Odds', 'Come_Nine_Odds', 'Come_Eight_Odds',
-				 'Come_Six_Odds', 'Come_Five_Odds', 'Come_Four_Odds','Dont_Come_Ten_Odds', 'Dont_Come_Nine_Odds', 
-				 'Dont_Come_Eight_Odds', 'Dont_Come_Six_Odds', 'Dont_Come_Five_Odds', 'Dont_Come_Four_Odds','Come', 
+				 'Come_Six_Odds', 'Come_Five_Odds', 'Come_Four_Odds','Dont_Come_Ten_Odds', 'Dont_Come_Nine_Odds',
+				 'Dont_Come_Eight_Odds', 'Dont_Come_Six_Odds', 'Dont_Come_Five_Odds', 'Dont_Come_Four_Odds','Come',
 				 'Dont_Come','Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds', 'Dont_Pass_Line_Odds'];
 
 			if(self.removal() && !d3_svg.select(".Chip__" + id)[0][0]){
@@ -137,7 +140,7 @@ window.onload = function () {
 						placechip = self.passlinecheck(id);}
 					else if(id === 'Come' || id === 'Dont_Come'){
 						placechip = self.comebetcheck(id);}
-					else if(id.slice(-5).includes('_Odds')){ 
+					else if(id.slice(-5).includes('_Odds')){
 						placechip = self.oddscheck(id);}
 					else{
 						placechip = self.numbercomecheck(id)};
@@ -150,7 +153,7 @@ window.onload = function () {
 		self.passlinecheck = function(id){
 			var placechip = true;
 
-			self.point() === 0 ? null: 
+			self.point() === 0 ? null:
 
 				self.bets().includes(id) && !self.removal() ? self.addoddstoid(id) : placechip=false;
 
@@ -200,25 +203,25 @@ window.onload = function () {
 				self.total(self.total() - d);
 				self.ev(self.ev() - d * Number(jsondata[id]['EV'].slice(1)));
 				returnval = -d;
-				
+
 			}else if(self.removal() && Math.abs(self.denomination()) < d && !self.singleremove){
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
 				returnval = self.denomination();
-				
+
 			}else if(self.singleremove){
 				self.ev(self.ev() - d * Number(jsondata[id]['EV'].slice(1)))
 				returnval = -d;
 				self.singleremove = false;
-				
+
 			}else if(!self.removal() && !self.singleremove){
 				self.bank(self.bank() - self.denomination());
 				self.total(self.total() + self.denomination());
 				self.ev(self.ev() + self.denomination() * Number(jsondata[id]['EV'].slice(1)));
-				
+
 				returnval = self.denomination();
-				
+
 			};
 
 			return d + returnval;
@@ -243,13 +246,13 @@ window.onload = function () {
 						.datum(function(d,i) {return self.tally(d,i,id)})
 						.attr({
 							"xlink:href":"#Chip",
-							"x":x, 
+							"x":x,
 							"y":y})
 						.classed(chip_class, true)
 						.style('fill', function(d,i)
-							 {	
+							 {
 								var color = {5:'#9f0', 6:'#9f0', 25:'#FF0DDF', 100:'#17F'}
-								return color[d];	
+								return color[d];
 							;})
 						.on('mouseover', function(d) {tip.show(d, target);})
 						.on('mouseout', function(d) {tip.hide(d, target);})
@@ -272,21 +275,21 @@ window.onload = function () {
 				};
 			};
 
-			self.collectbets(id);		
+			self.collectbets(id);
 		};
 		self.collectbets = function(id){
 
 			if(self.removal()){
-				!d3_svg.select(".Chip__" + id)[0][0] ? 
-					self.bets.remove(id)			
-				: 
+				!d3_svg.select(".Chip__" + id)[0][0] ?
+					self.bets.remove(id)
+				:
 				null;
 			}else{
-				self.bets().indexOf(id) === - 1 ? 
+				self.bets().indexOf(id) === - 1 ?
 					self.bets.push(id)
 				: null;
 			}
-			
+
 		};
 		self.singleclear = function(id){
 
@@ -298,7 +301,7 @@ window.onload = function () {
 		};
 		self.clear = function(){
 
-			if(self.bets().length > 0) { 
+			if(self.bets().length > 0) {
 				self.removal(true);
 
 				self.bets().forEach(function (item, index, array){
@@ -325,10 +328,10 @@ window.onload = function () {
 		};
 	//Roll Portion of Code
 		self.diceroll = function(){
-			
+
 			TweenMax.to('svg #d1', Math.random()+1, {rotation:360, transformOrigin: "50% 50%", x:450, startAt:{x:0, rotation:-360}});
 			TweenMax.to('svg #d2', Math.random()+1, {rotation:360, transformOrigin: "50% 50%", x:450, startAt:{x:0, rotation:-360}});
-		
+
 
 		}
 		self.roll = function(){
@@ -384,7 +387,7 @@ window.onload = function () {
 				var name = 'Dont_Come'
 				var run = true;
 			};
-				
+
 			if(run){
 				self.denomination(chip.datum());
 				self.chip(targetid);
@@ -395,26 +398,26 @@ window.onload = function () {
 				self.denomination(self.denom[self.textdenomination()]);
 				self.movecomebets(dice);
 			}
-			
-			
+
+
 		};
 		self.netresults = function(dice,net,hard){
 			console.log(self.bets()[0])
 			self.net(net);
 
 			if (self.bets().length > 0){
-				
+
 				//This removeAll function returns an array so it could be useful in logging wins
-				//self.winlist().length > 50 ? self.winlist.removeAll() : null; 
+				//self.winlist().length > 50 ? self.winlist.removeAll() : null;
 
 				self.bets().forEach(function (item, index, array){
 
 					var winloss = d3_svg.select('.Chip__'+item).datum(),
-						
+
 					loss_arr, win_arr, payout_arr, passpayout = false;
-					
+
 					if (self.point() != 0 && item === 'Pass_Line'){
-						loss_arr = [7]; 
+						loss_arr = [7];
 						win_arr = [self.point()];
 						payout_arr = [1];
 						passpayout = true;
@@ -434,130 +437,132 @@ window.onload = function () {
 					}else{
 						loss_arr = jsondata[item]['Loss'];
 						win_arr = jsondata[item]['Win'];
-						payout_arr = jsondata[item]['Payout'];	
+						payout_arr = jsondata[item]['Payout'];
 					};
-									
+
 					//if first three string are Har or Hop
 					//Win arr is one of the dice then one of the die
-					if(item.substr(0,4)==='Hard') { 
-						loss_arr.includes(dice) && hard ? 
-							win_arr = jsondata[item]['Win'] && loss_arr.pop(dice) 
-						: 
+					if(item.substr(0,4)==='Hard') {
+						loss_arr.includes(dice) && hard ?
+							win_arr = jsondata[item]['Win'] && loss_arr.pop(dice)
+						:
 							loss_arr = jsondata[item]['Loss'], win_arr.pop();
-					}; 
-					
+					};
+
 					if(item.substr(0,4)==='Hop_') {
-						
+
 						if(win_arr[0] === dice){
 							var needed_digit = jsondata[item]['HopDigit'][0];
-							
-						 	self.firstdie() === needed_digit || self.seconddie() === needed_digit ? 
-								
+
+						 	self.firstdie() === needed_digit || self.seconddie() === needed_digit ?
+
 								loss_arr.pop(dice)
-							: 
-								
+							:
+
 								win_arr.pop(dice)
 						}
-						
+
 					};
-					
-					if(item.substr(0,7)==='HopHard') { 
-						win_arr[0] === dice && hard ? 
-							win_arr = jsondata[item]['Win'] && loss_arr.pop(dice) 
-						: 
+
+					if(item.substr(0,7)==='HopHard') {
+						win_arr[0] === dice && hard ?
+							win_arr = jsondata[item]['Win'] && loss_arr.pop(dice)
+						:
 							loss_arr = jsondata[item]['Loss'], win_arr.pop();
 					};
 
 					if(loss_arr.includes(dice)){
-						
+
 						self.winlist.push(new self.Winloss(item, -winloss));
 						self.net(self.net() - winloss);
 						self.total(self.total() - winloss);
 						self.singleclear(item);
 						self.netresults(dice,self.net());
-						
+
 					};
 
 					if(win_arr.includes(dice)){
-						
+
 						var cntremove = ['Pass_Line', 'Dont_Pass_Line', 'Pass_Line_Odds','Dont_Pass_Line_Odds','Come','Dont_Come','Come_Four','Come_Five','Come_Six','Come_Eight','Come_Nine','Come_Ten',
 							 'Dont_Come_Four','Dont_Come_Five','Dont_Come_Six',
 							  'Dont_Come_Eight','Dont_Come_Nine','Dont_Come_Ten', 'Come_Four_Odds','Come_Five_Odds','Come_Six_Odds','Come_Eight_Odds','Come_Nine_Odds','Come_Ten_Odds','Dont_Come_Four_Odds','Dont_Come_Five_Odds','Dont_Come_Six_Odds','Dont_Come_Eight_Odds','Dont_Come_Nine_Odds','Dont_Come_Ten_Odds']
-						
+
 						if(cntremove.indexOf(item) != -1){
-							
+
 							item === 'Dont_Pass_Line_Odds' ? win_arr = jsondata[item]['Loss']: null;
 							item === 'Pass_Line_Odds' ? win_arr = jsondata[item]['Win']: null;
-							
+
 							var win = passpayout ? winloss : Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
-							
+
 							self.winlist.push(new self.Winloss(item, win));
-//							win = win + winloss; 
+//							win = win + winloss;
+
+
 							self.total(self.total() - winloss);
 							self.singleclear(item);
 							self.bank(self.bank() + win);
 							self.netresults(dice,self.net());
+
 						}else{
-							
+
 							var win = Math.ceil(payout_arr[win_arr.indexOf(dice)] * winloss);
 						}
-						
+
 						self.winlist().indexOf(item) === -1 ? self.winlist.push(new self.Winloss(item, win)) : null;
-						
-						self.singleclear(item);
-						self.total(self.total() - winloss);
-						self.net(self.net() + win);
-						self.bank(self.bank() + win + winloss);
-						self.netresults(dice,self.net());
-					};
-					
-					
+
+							self.singleclear(item);
+							self.total(self.total() - winloss);
+							self.net(self.net() + win);
+							self.bank(self.bank() + win + winloss);
+							self.netresults(dice,self.net());
+
+
+				};
 				});
-				
-				
+
 			};
 
 		};
 		self.Winloss = function(betname, amount){
+			this.amount = amount;
 		this.name = betname;
-		this.amount = amount;
 		};
 		self.winlisttotal = function(){
 			var total = 0;
 			if (self.winlist().length > 0){
-				
+
 				self.winlist().forEach(function(item, index, array){
 					//The item is a Winloss object with amount as a property
 					total += item.amount;
-					
+
 				})
 			}
 			return total;
 		};
 		self.repeat = function(){
 			if (self.bets().length > 0){
-				
-				
+
+
 				self.repeatlist().length > 0 && self.repeatlist.removeAll();
-				
+
 				self.bets().forEach(function(item, index, array){
-					
-					
+
+
 					var betamt = d3_svg.select('.Chip__'+item).datum();
 					self.repeatlist.push(new self.Winloss(item,betamt))
 				})
 			};
 		};
 		self.betrepeat = function(){
-			
+
 			if(self.repeatlist().length > 0){
-				
+
 				self.repeatlist().forEach(function(item, index, array){
-					
+
 					var name = item.name, amt = item.amount;
-					
+
 					if (!self.bets().includes(name)){
-						
+
 						if (name.slice(-4) == 'Odds'){ return;}
 						self.removal(false);
 						self.denomination(amt);
@@ -570,42 +575,54 @@ window.onload = function () {
 			}
 		};
 		self.ironcross = function(){
-			self.crosset(!self.crosset());
-			
+			self.cross_press(true);
+			self.cross_parlay(true);
+
+
 			if(self.crosset()){
+
 				var bet,
 				    cross = ["Place_Five","Place_Six","Place_Eight","Field"];
-				
+
 				for (bet of cross){
+
 					if (bet === "Field") {
-						self.denomination(10)
+						self.denomination(self.fd)
+					}else if (bet === "Place_Five") {
+						self.denomination(self.plfive)
 					}else{
-						self.denomination(30)
+						self.denomination(self.plsixeight)
 					}
 					self.chip(bet)
-				}	
-			
+				}
+				self.denonimation(0);
+
+
 			}else{
-				self.clear()
-				self.cross_press(false)
-				self.cross_parlay(false)
+				self.plfive = 30;
+				self.plsixeight = 30;
+
+				self.crossset(true)
+				self.ironcross()
+
 			}
 		}
 		self.parlay = function(){
-			self.cross_press(false)
-			self.cross_parlay(true)
+
+
+				self.plfive = self.plfive + 10;
+				self.plsixeight = self.plsixeight + 6;
+				self.ironcross();
+
 		}
 		self.press = function(){
-			self.cross_press(true)
-			self.cross_parlay(false)
-		}
-		
-		}
-		
+			
+				self.plfive = self.plfive + 5;
+				self.plsixeight = self.plsixeight + 6;
+
+				self.ironcross();
+			}
+}
 	ko.applyBindings(new viewModel());
 
 }
-
-		
-
-
