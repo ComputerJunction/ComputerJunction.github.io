@@ -582,7 +582,7 @@ window.onload = function () {
 			var bet,
 			    cross = ["Place_Five","Place_Six","Place_Eight","Field"];
 			
-			if(self.total() <= 100){
+			if(self.net() <= 10){
 				self.plfive = 30;
 				self.plsixeight = 30;
 			}
@@ -600,23 +600,23 @@ window.onload = function () {
 			}
 		}
 		self.parlay = function(){
-			var five = self.plfive, six = self.plsixeight;
+			
 				self.ironcross();
 				self.clear();
 			
-				self.plfive = five + 10;
-				self.plsixeight = six + 6;
+				self.plfive ++ + 10;
+				self.plsixeight ++ 6;
 			
 				self.ironcross();
 
 		}
 		self.press = function(){
-			var five = self.plfive, six = self.plsixeight;
+			
 				self.ironcross();
 				self.clear();
 			
-				self.plfive = five + 5;
-				self.plsixeight = six + 6;
+				self.plfive ++ 5;
+				self.plsixeight ++ 6;
 
 				self.ironcross();
 			}
