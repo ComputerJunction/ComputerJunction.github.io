@@ -604,7 +604,7 @@ window.onload = function () {
 				self.ironcross();
 				self.clear();
 			
-				self.plfive ++ + 10;
+				self.plfive ++ 10;
 				self.plsixeight ++ 6;
 			
 				self.ironcross();
