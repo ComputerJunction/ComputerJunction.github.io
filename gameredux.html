@@ -9,7 +9,7 @@
 	<meta name="description" content="Craps is game with more bets than letters of the alphabet.  So lets talk about all of them.">
 	<meta name="robots" content="index">
 	<meta name="author" content="Ivan Harris">
-	
+
     <title>Craps Clever</title>
 	<link rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/index.css">
@@ -17,17 +17,17 @@
 	<link rel="stylesheet" href="css/board_svg.css">
 	<link rel="stylesheet" href="css/game.css">
 	<link rel="stylesheet" href="css/example-styles.css">
-	
+
 </head>
 
 <body class="skyblue">
 
-	
+
 		<header>
 			<div class="navyblue">
 				<img class='pull-left hidden-xs' alt="Too Clever by Half" src="images/toocleverdice_poster_.png" >
 				<h1 class="cursive marquee hidden-xs">Craps Clever</h1>
-			
+
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header navyblue">
@@ -36,11 +36,11 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
-						</button> 
+						</button>
 
 						<p class="navbar-brand cursive marquee hidden-lg hidden-md hidden-sm visible-xs smallfont">Craps Clever</p>
 
-						
+
 				</div>
 					<div class="collapse navbar-collapse" id="navcollapse">
 						<ul class="nav nav-pills">
@@ -54,9 +54,9 @@
 			</nav>
 			</div>
 		</header>
-	
-	<h3 id="session" class="container"> Session Total:&#36;<span data-bind="text:winlisttotal()"></span> </h3>
-	
+
+
+		<h3 id="session" class="container"> Session Total:&#36;<span data-bind="text:winlisttotal()"></span> </h3>
 		<section class="container">
 
 		<article class="col-lg-10 col-md-10-block col-sm-10-block gamearticle">
@@ -66,15 +66,15 @@
 						<circle cy="1.75" r="2.75" />
 					</g>
 				</defs>
-				
+
 				<circle cx="300.4" cy="7" r="6" id="puck"/>
-				
-				
+
+
 				<text x="0.5" class="textfit">
 					<tspan x="7.5" y="60">Click chips</tspan>
 					<tspan x="7.5" dy="7"> below before betting</tspan>
 				</text>
-			
+
 				<g transform="translate(32.5, 90)">
 					<circle r="14" class="removalcircle" data-bind="css:{clicked: removal()=== false}"/>
 					<text dx="-11" class="textfit">
@@ -82,7 +82,7 @@
 						<tspan dx="-22" dy="7">Bets</tspan>
 					</text>
 				</g>
-				
+
 				<g transform="translate(32.5, 120)">
 					<circle r="10" class="five" data-bind="css:{clicked: denomination() === 0 || denomination() != 5, remove:denomination() === -5}"/>
 					<text dy="+4" dx="-3" class="textden">5</text>
@@ -95,14 +95,14 @@
 					<circle r="10" class="onehundred" data-bind="css:{clicked: denomination() === 0 || denomination() != 100, remove:denomination() === -100}"/>
 					<text dy="4" dx="-9" class="textden">100</text>
 				</g>
-				
+
 				<rect x="22.5" y="80" height="20" width="20" id="remove" class="clickrect"></rect>
 				<rect x="22.5" y="110" height="20" width="20" id="five" class="clickrect"></rect>
 				<rect x="22.5" y="140" height="20" width="20" id="twentyfive" class="clickrect"></rect>
 				<rect x="22.5" y="170" height="20" width="20" id="onehundred" class="clickrect"></rect>
-				
-				
-				
+
+
+
 				<g id="DisplayDice">
 					<g id="RollRect">
 						<rect x="0.5" y="12.5" width="64" height="39" class="style34"/>
@@ -229,14 +229,14 @@
 							<ellipse cx="56.4" cy="29.7" rx="1.7" ry="1.9" class="style42"/>
 					</g>
 				</g>
-				
+
 				<rect id="Dont_Come_Box" x="480.4" y="15" width="32.7" height="40" class="style0"/>
 				<text id="DComeText" transform="matrix(0.72 0 0 1 487.9447 31.4092)">
 					<tspan x="0" y="0" class="style4">Don&#8217;t </tspan>
 					<tspan x="-0.3" y="10.8" class="style4">Come</tspan>
 				</text>
 				<rect id="Dont_Come" x="480.4" y="15" width="32.7" height="40" class="clickrect"/>
-					
+
 				<polygon points="497.9,163 330.5,163 330.5,106.5 513,106.5 513,145.7" class="style0"/>
 				<text id="FieldText" transform="matrix(1 0 0 1 403.2997 146.7681)" class="style6">Field</text>
 				<ellipse id="CircleTwo" cx="375" cy="136.8" rx="7.2" ry="7.4" class="style0"/>
@@ -265,7 +265,7 @@
 				<path d="M473.854 124.425c0.189 0.1 0.3 0.1 0.5 0.237c-0.536 1.001-0.805 1.502-1.341 2.5 c-0.139-0.074-0.209-0.11-0.35-0.177C473.12 126 473.4 125.5 473.9 124.425z"/>
 				<path d="M474.248 126.879c-0.258 0.399-0.075 0.8 0.2 1.024c0.231 0.2 0.4 0.3 0.5 0.4 c-0.049 0.093-0.073 0.139-0.123 0.231c-0.144-0.062-0.366-0.186-0.64-0.408c-0.53-0.431-0.674-0.958-0.367-1.455 c0.306-0.497 0.965-0.654 1.589-0.152c0.701 0.6 0.5 1.2 0.2 1.411c-0.051 0.051-0.099 0.082-0.128 0.1 C475.084 127.5 474.8 127.3 474.2 126.879z M475.448 127.507c0.154-0.162 0.295-0.523-0.134-0.864 c-0.385-0.307-0.752-0.15-0.919 0.031C474.834 127 475 127.1 475.4 127.507z"/>
 				<rect id="Field" x="330.5" y="106.5" width="170" height="54" class="clickrect" />
-				
+
 				<rect id="Hard_Four" x="167.9" y="82.3" width="92" height="25" class="style0"/>
 					<rect x="227.9" y="87.3" width="14" height="11" class="style7"/>
 						<ellipse cx="238.6" cy="95.1" rx="1" ry="0.9" class="style9"/>
@@ -308,14 +308,14 @@
 						<ellipse cx="238.5" cy="120.1" rx="1.2" ry="0.9" class="style12"/>
 						<ellipse cx="230.5" cy="114.9" rx="1.2" ry="0.9" class="style12"/>
 						<ellipse cx="234.6" cy="117.5" rx="1" ry="0.9" class="style9"/>
-					
+
 					<rect x="75.9" y="13.3" width="13" height="11" class="style7"/>
 						<circle cx="82.5" cy="18.8" r="1" class="style14"/>
 					<rect x="75.9" y="28.3" width="13" height="11" class="style7"/>
 						<ellipse cx="86.5" cy="36.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="78.5" cy="30.8" rx="1.1" ry="1" class="style15"/>
 						<circle cx="82.6" cy="33.8" r="1" class="style14"/>
-					
+
 					<rect x="90.9" y="13.3" width="13" height="11" class="style7"/>
 						<circle cx="97.5" cy="18.8" r="1" class="style14"/>
 					<rect x="90.9" y="28.3" width="13" height="11" class="style7"/>
@@ -323,7 +323,7 @@
 						<circle cx="93.5" cy="36.8" r="1" class="style14"/>
 						<ellipse cx="101.4" cy="36.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="93.4" cy="30.8" rx="1.1" ry="1" class="style15"/>
-				
+
 					<rect x="104.9" y="28.3" width="13" height="11" class="style7"/>
 						<ellipse cx="115.4" cy="36.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="107.4" cy="30.8" rx="1.1" ry="1" class="style15"/>
@@ -331,7 +331,7 @@
 					<rect x="104.9" y="13.3" width="13" height="11" class="style7"/>
 						<circle cx="115.1" cy="21.8" r="1" class="style14"/>
 						<circle cx="107.1" cy="15.8" r="1" class="style14"/>
-				
+
 					<rect x="133.9" y="13.3" width="12" height="11" class="style7"/>
 						<ellipse cx="139.8" cy="18.8" rx="1" ry="1" class="style21"/>
 					<rect x="133.9" y="28.3" width="12" height="11" class="style7"/>
@@ -349,7 +349,7 @@
 						<ellipse cx="123" cy="36.8" rx="1" ry="1" class="style21"/>
 						<ellipse cx="130.6" cy="36.8" rx="1.1" ry="1" class="style22"/>
 						<ellipse cx="122.9" cy="30.8" rx="1.1" ry="1" class="style22"/>
-				
+
 					<rect x="175.9" y="13.3" width="13" height="11" class="style7"/>
 						<circle cx="182.2" cy="18.8" r="1" class="style14"/>
 					<rect x="175.9" y="28.3" width="13" height="11" class="style7"/>
@@ -359,7 +359,7 @@
 						<circle cx="186.1" cy="30.8" r="1" class="style14"/>
 						<circle cx="178.1" cy="36.8" r="1" class="style14"/>
 						<circle cx="186.1" cy="33.8" r="1" class="style14"/>
-				
+
 				<rect x="161.9" y="13.3" width="13" height="11" class="style7"/>
 						<ellipse cx="171.5" cy="21.8" rx="1.1" ry="1" class="style20"/>
 						<ellipse cx="163.8" cy="15.8" rx="1.1" ry="1" class="style20"/>
@@ -368,8 +368,8 @@
 						<circle cx="164" cy="36.8" r="1" class="style14"/>
 						<ellipse cx="171.9" cy="36.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="163.9" cy="30.8" rx="1.1" ry="1" class="style15"/>
-						<circle cx="168" cy="33.8" r="1" class="style14"/>		
-				
+						<circle cx="168" cy="33.8" r="1" class="style14"/>
+
 					<rect x="147.9" y="13.3" width="13" height="11" class="style7"/>
 						<ellipse cx="157.8" cy="21.8" rx="1.1" ry="1" class="style20"/>
 						<circle cx="154" cy="18.8" r="1" class="style14"/>
@@ -378,8 +378,8 @@
 						<circle cx="158" cy="30.8" r="1" class="style14"/>
 						<circle cx="150" cy="36.8" r="1" class="style14"/>
 						<ellipse cx="157.9" cy="36.8" rx="1.1" ry="1" class="style15"/>
-						<ellipse cx="149.9" cy="30.8" rx="1.1" ry="1" class="style15"/>	
-				
+						<ellipse cx="149.9" cy="30.8" rx="1.1" ry="1" class="style15"/>
+
 					<rect x="204.9" y="13.3" width="12" height="11" class="style7"/>
 						<ellipse cx="214.6" cy="21.1" rx="1" ry="0.9" class="style17"/>
 						<ellipse cx="207.9" cy="15.8" rx="1" ry="0.9" class="style17"/>
@@ -390,7 +390,7 @@
 						<ellipse cx="215.1" cy="30.5" rx="1" ry="1" class="style18"/>
 						<ellipse cx="207.4" cy="36.5" rx="1" ry="1" class="style18"/>
 						<ellipse cx="215.1" cy="33.5" rx="1" ry="1" class="style18"/>
-				
+
 					<rect x="190.9" y="13.3" width="13" height="11" class="style7"/>
 						<ellipse cx="201.5" cy="21.1" rx="1.1" ry="0.9" class="style16"/>
 						<ellipse cx="197.8" cy="18.4" rx="1" ry="0.9" class="style17"/>
@@ -401,7 +401,7 @@
 						<ellipse cx="201.6" cy="36.5" rx="1.1" ry="1" class="style19"/>
 						<ellipse cx="193.9" cy="30.5" rx="1.1" ry="1" class="style19"/>
 						<ellipse cx="197.8" cy="33.5" rx="1" ry="1" class="style18"/>
-						
+
 					<rect x="232.9" y="13.3" width="13" height="11" class="style7"/>
 						<circle cx="239.5" cy="18.8" r="1" class="style14"/>
 						<ellipse cx="243.4" cy="21.8" rx="1.1" ry="1" class="style20"/>
@@ -413,7 +413,7 @@
 						<circle cx="243.5" cy="30.8" r="1" class="style14"/>
 						<circle cx="235.5" cy="36.8" r="1" class="style14"/>
 						<circle cx="243.5" cy="33.8" r="1" class="style14"/>
-				
+
 					<rect x="218.9" y="28.3" width="13" height="11" class="style7"/>
 						<circle cx="229.5" cy="30.8" r="1" class="style14"/>
 						<circle cx="221.5" cy="36.8" r="1" class="style14"/>
@@ -438,14 +438,14 @@
 						<circle cx="250.6" cy="21.8" r="1" class="style14"/>
 						<ellipse cx="258.5" cy="21.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="250.5" cy="15.8" rx="1.1" ry="1" class="style15"/>
-				
+
 					<rect x="75.9" y="55.3" width="13" height="11" class="style7"/>
 						<circle cx="86.5" cy="63.8" r="1" class="style14"/>
 						<circle cx="78.5" cy="57.8" r="1" class="style14"/>
 					<rect x="75.9" y="42.3" width="13" height="11" class="style7"/>
 						<circle cx="86.5" cy="50.8" r="1" class="style14"/>
 						<circle cx="78.5" cy="44.8" r="1" class="style14"/>
-						
+
 					<rect x="133.9" y="55.3" width="13" height="11" class="style7"/>
 						<ellipse cx="144.1" cy="63.5" rx="1" ry="1" class="style24"/>
 						<ellipse cx="136.9" cy="57.5" rx="1" ry="1" class="style24"/>
@@ -453,8 +453,8 @@
 					<rect x="120.9" y="42.3" width="13" height="11" class="style7"/>
 						<ellipse cx="131.5" cy="50.8" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="123.5" cy="44.8" rx="1.1" ry="1" class="style15"/>
-						<circle cx="127.6" cy="47.8" r="1" class="style14"/>	
-				
+						<circle cx="127.6" cy="47.8" r="1" class="style14"/>
+
 					<rect x="203.9" y="56.3" width="13" height="11" class="style7"/>
 						<ellipse cx="214.7" cy="58.4" rx="1" ry="1" class="style27"/>
 						<ellipse cx="206.7" cy="64.6" rx="1" ry="1" class="style27"/>
@@ -478,12 +478,12 @@
 						<ellipse cx="258.5" cy="50.5" rx="1.1" ry="1" class="style15"/>
 						<ellipse cx="250.5" cy="44.5" rx="1.1" ry="1" class="style15"/>
 					<circle cx="254.6" cy="47.5" r="1" class="style14"/>
-				
+
 				<rect id="Hop_Four" x="74.926" y="13.276" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Five" x="89.926" y="13.276" width="14" height="28" class="clickrect"/>
-				<rect id="Hop_Five_2" x="103.926" y="13.276" width="14" height="28" class="clickrect"/>		
+				<rect id="Hop_Five_2" x="103.926" y="13.276" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Six" x="132.926" y="13.276" width="14" height="28" class="clickrect"/>
-				<rect id="Hop_Six_2" x="118.926" y="13.276" width="14" height="28" class="clickrect"/>	
+				<rect id="Hop_Six_2" x="118.926" y="13.276" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Seven" x="174.926" y="13.276" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Seven_2" x="160.926" y="13.276" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Seven_3" x="146.926" y="13.276" width="14" height="28" class="clickrect"/>
@@ -492,21 +492,21 @@
 				<rect id="Hop_Nine" x="231.9" y="13.3" width="14" height="28" class="clickrect"/>
 				<rect id="Hop_Nine_4" x="217.9" y="13.3" width="14" height="28" class="clickrect" />
 				<rect id="Hop_Ten" x="246.9" y="13.3" width="14" height="28" class="clickrect" />
-					
+
 				<rect id="HopHard_Ten" x="246.9" y="41.3" width="15" height="28" class="clickrect"/>
 				<rect id="HopHard_Eight" x="189.9" y="41.3" width="28" height="28" class="clickrect"/>
 				<rect id="HopHard_Six" x="119.9" y="41.3" width="28" height="28" class="clickrect"/>
 				<rect id="HopHard_Four" x="74.9" y="41.3" width="14" height="28" class="clickrect"/>
-				
-					
+
+
 				<path d="M281 105.276c-5.518 0-10 4.482-10 10 s4.482 10 10 10s10-4.482 10-10S286.518 105.3 281 105.276z M282.272 119.521c0.92 0 1.94-0.192 2.541-0.423l0.46 2.3 c-0.56 0.269-1.82 0.557-3.46 0.557c-4.661 0-7.062-2.783-7.062-6.469c0-4.415 3.281-6.872 7.361-6.872 c1.581 0 2.8 0.3 3.3 0.575l-0.62 2.323c-0.62-0.249-1.48-0.479-2.561-0.479c-2.42 0-4.301 1.4-4.301 4.3 C277.951 117.9 279.6 119.5 282.3 119.521z" class="style29"/>
 				<path d="M306.926 102.276c-5.523 0-10 4.477-10 10 c0 5.5 4.5 10 10 10s10-4.477 10-10C316.926 106.8 312.4 102.3 306.9 102.276z M311.633 118.747h-8.603v-12.938 h8.322v2.399h-5.262v2.688h4.961v2.381h-4.961v3.07h5.542V118.747z" class="style29"/>
 				<line x1="290.9" y1="114.8" x2="297.1" y2="113.4" class="style30"/>
-				
+
 				<rect id="Any_Craps" x="270.9" y="101.3" width="20" height="28" class="clickrect" />
 				<rect id="YoEleven" x="297.9" y="99.3" width="20" height="28" class="clickrect" />
 				<rect id="CE_Split" x="290.9" y="99.3" width="7" height="30" class="clickrect" />
-						
+
 					<rect id="Horn_Twelve" x="173.9" y="144.3" width="86" height="25" class="style0"/>
 						<rect x="218.9" y="149.3" width="13" height="11" class="style7"/>
 							<ellipse cx="229.7" cy="157.8" rx="1" ry="1" class="style31"/>
@@ -575,15 +575,15 @@
 							<path d="M198.659 139.016v-0.026c0.553-0.187 1.135-0.712 1.135-1.477c0-0.552-0.21-0.97-0.591-1.254 c-0.458-0.339-1.125-0.472-2.079-0.472c-0.772 0-1.469 0.053-1.936 0.124v5.916h1.44v-2.357h0.439 c0.591 0 0.9 0.2 1 0.961c0.19 0.7 0.3 1.2 0.4 1.396h1.487c-0.124-0.231-0.324-1.014-0.524-1.69 C199.356 139.6 199.1 139.2 198.7 139.016z M197.2 138.491h-0.572v-1.654c0.105-0.019 0.305-0.045 0.658-0.045 c0.667 0 1.1 0.3 1.1 0.836C198.354 138.2 197.9 138.5 197.2 138.491z"/>
 							<path d="M202.882 137.379c-1.622 0-2.355 1.219-2.355 2.322c0 1.4 0.9 2.2 2.5 2.215c0.629 0 1.211-0.089 1.688-0.267 l-0.19-0.916c-0.391 0.115-0.792 0.178-1.288 0.178c-0.677 0-1.269-0.268-1.316-0.827h3.004 c0.019-0.099 0.048-0.303 0.048-0.534C204.961 138.5 204.4 137.4 202.9 137.379z M201.899 139.2 c0.038-0.364 0.286-0.881 0.896-0.881c0.667 0 0.8 0.6 0.8 0.881H201.899z"/>
 							<path d="M210.346 140.528v-5.018h-1.45v2.357h-0.019c-0.209-0.302-0.658-0.489-1.23-0.489c-1.116 0-2.098 0.846-2.088 2.3 c0 1.4 0.9 2.2 2 2.232c0.601 0 1.163-0.249 1.459-0.738h0.019l0.067 0.641h1.287 C210.365 141.5 210.3 141 210.3 140.528z M208.897 139.888c0 0.116-0.009 0.214-0.038 0.3 c-0.085 0.383-0.419 0.649-0.839 0.649c-0.601 0-0.992-0.463-0.992-1.201c0-0.685 0.343-1.236 1.001-1.236 c0.448 0 0.8 0.3 0.8 0.667c0.01 0.1 0 0.2 0 0.24V139.888z"/>
-				
+
 				<polygon points="532.5,180.3 497.5,180.3 497.5,164 504.5,156" class="style0"/>
 					<text transform="matrix(0.9428 -0.9428 0.7071 0.7071 507.1101 176.0269)" class="style45">6</text>
 				<rect id="Big_Six" x="497" y="164" width="18" height="17" class="clickrect"/>
-				
+
 				<polygon points="532.5,179.7 504.5,155.7 513.5,145.7 534.5,145.7 534.5,169 534.5,178" class="style0"/>
 					<text transform="matrix(0.9428 -0.9428 0.7071 0.7071 522.1842 161.7349)" class="style45">8</text>
 				<rect id="Big_Eight" x="515.5" y="145.7" width="20" height="20" class="clickrect"/>
-				
+
 				<g id="Four">
 					<rect id="FourRect" x="330.5" y="15" width="24.9" height="40" class="style0"/>
 					<text id="FourText" transform="matrix(0.72 0 0 1 341.6009 39.4314)" class="style2">4</text>
@@ -629,7 +629,7 @@
 				<rect id="Come_Eight" x="405.5" y="38.2" width="25" height="5" class="clickrect"/>
 				<rect id="Come_Nine" x="430.5" y="38.2" width="25" height="5" class="clickrect"/>
 				<rect id="Come_Ten" x="455.5" y="38.2" width="25" height="5" class="clickrect"/>
-				
+
 				<rect id="Come_Four_Odds" x="343" y="38.2" width="12.5" height="5" class="clickrect"/>
 				<rect id="Come_Five_Odds" x="368" y="38.2" width="12.5" height="5" class="clickrect"/>
 				<rect id="Come_Six_Odds" x="393" y="38.2" width="12.5" height="5" class="clickrect"/>
@@ -643,7 +643,7 @@
 				<rect id="Dont_Come_Eight" x="405.5" y="28.2" width="25" height="5" class="clickrect"/>
 				<rect id="Dont_Come_Nine" x="430.5" y="28.2" width="25" height="5" class="clickrect"/>
 				<rect id="Dont_Come_Ten" x="455.5" y="28.2" width="25" height="5" class="clickrect"/>
-				
+
 				<rect id="Dont_Come_Four_Odds" x="343" y="28.2" width="12.5" height="5" class="clickrect"/>
 				<rect id="Dont_Come_Five_Odds" x="368" y="28.2" width="12.5" height="5" class="clickrect"/>
 				<rect id="Dont_Come_Six_Odds" x="393" y="28.2" width="12.5" height="5" class="clickrect"/>
@@ -675,61 +675,61 @@
 					<rect id="VDPassLineRect" x="513.9" y="15.1" width="20.5" height="130.7" class="style0"/>
 					<text id="HDPassLineText" transform="matrix(1 0 0 1 379.83 177.5376)" class="style2">Don&#8217;t Pass Line</text>
 					<text id="VDPassLineText" transform="matrix(0 -1 1 0 529.7589 121.3769)" class="style2">Don&#8217;t Pass Line</text>
-				
+
 				<rect id="Come" x="330.4" y="55" width="182.7" height="51" class="style0"/>
 					<text id="ComeText" transform="matrix(1 0 0 1 398.9594 84.9219)" class="style3">Come</text>
-				
-				
+
+
 					<path d="M548.998 194.163H330.5V180.73h200.482 c1.493-0.356 3.518-0.383 3.518-2.268l0.466-163.408H550v178.214C550 193.8 549.6 194.2 549 194.163z" class="style0"/>
 					<text id="HPassLineText" transform="matrix(1 0 0 1 394.7809 192.3237)" class="style2">Pass Line</text>
 					<text id="VPassLineText" transform="matrix(0 -1 1 0 546.5826 105.25)" class="style2">Pass Line</text>
 				<rect id="Pass_Line" x="330.4" y="181" width="219" height="13" class="clickrect"/>
-				
+
 				<rect id="Pass_Line_Odds" x="330.4" y="194" width="219" height="13" class="clickrect"/>
-				
+
 					<rect id='d1' x = "0" y = "205" width="20" height="20"/>
 					<rect id='d2' x = "0" y = "230" width="20" height="20"/>
-				
+
 			</svg>
-		
+
 
 		</article>
-		
+
 		<article class="col-lg-2 col-md-2-block col-sm-2-block skyblue" id="betbox">
-			<div class="well"> 
-				
+			<div class="well">
+
 				<h5>Bankroll: &#36;<span data-bind="text:bank()"></span></h5>
 				<h5>Total Wager: &#36;<span data-bind="text:total()"></span></h5>
 				<h5>Net: &#36;<span data-bind="text:net()"></span></h5>
 				<h5>Expected Value: &#36;<span data-bind="text:ev().toFixed(2)"></span></h5>
-				
+
 				<button id="rollhere" type="button" class="btn btn-primary btn-block" data-bind="click:roll, disable:bank() < 4 || total() < 4">ROLL</button>
 				<button id="ironcross" type="button" class="btn btn-primary btn-block" data-bind="click:ironcross">Iron Cross</button>
-				<button id="press" type="button" class="btn btn-success btn-block" data-bind="click:press, visible:crosset() && !cross_parlay()">Press</button>
-				<button id="parlay" type="button" class="btn btn-success btn-block" data-bind="click:parlay, visible:crosset() && !cross_press()">Parlay</button>
-				
+				<button id="press" type="button" class="btn btn-success btn-block" data-bind="click:press, visible:crosset() && cross_press()">Press</button>
+				<button id="parlay" type="button" class="btn btn-success btn-block" data-bind="click:parlay, visible:crosset() && cross_parlay()">Parlay</button>
+
 				<button type="button" class="btn btn-warning btn-block" data-bind="click:clear">RESET ALL</button>
 				<button id="repeathere" type="button" class="btn btn-success btn-block" data-bind="click:betrepeat, visible:repeatlist().length > 0">Repeat?</button>
-			
+
 			<div class="well winlist">
 				<ol data-bind="foreach:winlist">
-					<li> 
+					<li>
 						<span data-bind="text:$data.name"></span>
-						<em>&#58;</em> 
+						<em>&#58;</em>
 						<em>&#36;</em>
 						<span data-bind="text:$data.amount"> </span>
 					</li>
 				</ol>
-				
-			
-			
+
+
+
 		</article>
 	</section>
-	
+
 
 	<div class="container-fluid">
 		<footer class="navyblue">
-			
+
 		</footer>
 	</div>
 
