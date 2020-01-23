@@ -316,7 +316,7 @@ window.onload = function () {
 
 
 					}else{
-						console.log(item)
+						
 						self.chip(item);
 	//					self.tally();
 						self.clear();
