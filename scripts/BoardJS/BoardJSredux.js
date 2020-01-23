@@ -600,13 +600,16 @@ window.onload = function () {
 		}
 		self.parlay = function(){
 
-
+				self.clear();
+			
 				self.plfive = self.plfive + 10;
 				self.plsixeight = self.plsixeight + 6;
+			
 				self.ironcross();
 
 		}
 		self.press = function(){
+				self.clear();
 			
 				self.plfive = self.plfive + 5;
 				self.plsixeight = self.plsixeight + 6;
