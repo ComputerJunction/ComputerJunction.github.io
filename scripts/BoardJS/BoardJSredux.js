@@ -578,33 +578,24 @@ window.onload = function () {
 			self.cross_press(true);
 			self.cross_parlay(true);
 
-
-			if(self.crosset()){
-
-				var bet,
-				    cross = ["Place_Five","Place_Six","Place_Eight","Field"];
-
-				for (bet of cross){
-
-					if (bet === "Field") {
-						self.denomination(self.fd)
-					}else if (bet === "Place_Five") {
-						self.denomination(self.plfive)
-					}else{
-						self.denomination(self.plsixeight)
-					}
-					self.chip(bet)
-				}
-				self.denonimation(0);
-
-
-			}else{
+			var bet,
+			    cross = ["Place_Five","Place_Six","Place_Eight","Field"];
+			
+			if(self.total() <= 100){
 				self.plfive = 30;
 				self.plsixeight = 30;
+			}
 
-				self.crossset(true)
-				self.ironcross()
+			for (bet of cross){
 
+				if (bet === "Field") {
+					self.denomination(self.fd)
+				}else if (bet === "Place_Five") {
+					self.denomination(self.plfive)
+				}else{
+					self.denomination(self.plsixeight)
+				}
+				self.chip(bet)
 			}
 		}
 		self.parlay = function(){
